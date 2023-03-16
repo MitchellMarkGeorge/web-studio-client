@@ -251,7 +251,7 @@ export default function SplitPane({
             >
               {child}
             </div>
-            {/*  have a Divider hitbox?? */}
+            {/*  need a Divider hitbox */}
             <Divider
               isEnabled={enableResize}
               direction={direction}

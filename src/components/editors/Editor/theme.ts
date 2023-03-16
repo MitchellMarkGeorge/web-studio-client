@@ -1,7 +1,8 @@
 import { HighlightStyle, syntaxHighlighting } from "@codemirror/language";
 import { tags } from "@lezer/highlight";
-import { EditorView } from "codemirror";
+import { EditorView } from "@codemirror/view";
 
+// think about these colors
 const foreground = "#9cdcfe",
   background = "#1e1e1e",
   darkBackground = "#000000",
@@ -50,6 +51,7 @@ const mainTheme = EditorView.theme(
       color: foreground,
       fontWeight: 300,
       lineHeight: "150%",
+      padding: "10px",
       // backgroundColor: background,
     },
 
@@ -61,7 +63,7 @@ const mainTheme = EditorView.theme(
     "&.cm-focused .cm-selectionBackground, .cm-selectionBackground, .cm-content ::selection":
       { backgroundColor: selection },
 
-    ".cm-panels": { backgroundColor: darkBackground, color: foreground },
+    ".cm-panels": { backgroundColor:"#161718", color: foreground },
     ".cm-panels.cm-panels-top": { borderBottom: "2px solid black" },
     ".cm-panels.cm-panels-bottom": { borderTop: "2px solid black" },
 
@@ -73,14 +75,14 @@ const mainTheme = EditorView.theme(
       backgroundColor: "#6199ff2f",
     },
 
-    ".cm-activeLine": { backgroundColor: highlightBackground },
+    // ".cm-activeLine": { backgroundColor: highlightBackground },
     ".cm-selectionMatch": { backgroundColor: "#aafe661a" },
 
     "&.cm-editor .cm-scroller": {
-    //   fontFamily:
-    //     'Menlo, Monaco, Consolas, "Andale Mono", "Ubuntu Mono", "Courier New", monospace',
-    // fontFamily:
-    //   'Menlo, Monaco, Consolas, "Andale Mono", "Ubuntu Mono", "Courier New", monospace',
+      //   fontFamily:
+      //     'Menlo, Monaco, Consolas, "Andale Mono", "Ubuntu Mono", "Courier New", monospace',
+      // fontFamily:
+      //   'Menlo, Monaco, Consolas, "Andale Mono", "Ubuntu Mono", "Courier New", monospace',
       fontFamily:
         '"Fira Code", Menlo, Monaco, Consolas, "Andale Mono", "Ubuntu Mono", "Courier New", monospace',
     },
@@ -91,11 +93,11 @@ const mainTheme = EditorView.theme(
     },
 
     ".cm-gutters": {
-    //   backgroundColor: background,
-    backgroundColor: "#161718",
+      //   backgroundColor: background,
+      backgroundColor: "#161718",
       color: "#858585",
       border: "none",
-    //   borderRadius: "5px",
+      // paddingLeft: "10px"
     },
 
     ".cm-activeLineGutter": {
@@ -190,6 +192,7 @@ export const vsCodeDarkPlusHighlightStyle = HighlightStyle.define([
     tag: [tags.special(tags.string)],
     color: strings,
   },
+  // think about ths
   { tag: [tags.meta, tags.comment], color: metaAndComments },
   { tag: [tags.punctuation, tags.separator], color: punctuationAndSeparators },
   { tag: [tags.angleBracket], color: angleBrackets },

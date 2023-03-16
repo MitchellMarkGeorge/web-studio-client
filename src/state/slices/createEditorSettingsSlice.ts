@@ -8,13 +8,13 @@ export const createEditorSettingsSlice: StateCreator<
   Pick<WebStudioState,  "editorSettings" | "updateEditorSettings">
 > = (set, get) => ({
   editorSettings: {
-    autocompletion: true,
-    bracketMatching: true,
-    closeBrackets: true,
-    enableLinting: true,
+    autocompletionEnabled: true,
+    bracketMatchingEnabled: false,
+    closeBracketsEnabled: true,
+    lintingEnabled: true,
     enableReletiveLineNumbers: false,
-    lineNumbers: true,
-    formatOnSave: false
+    lineNumbersEnabled: true,
+    formatOnSave: false // think about this one
   },
 
   updateEditorSettings: (settings) => {

@@ -10,6 +10,7 @@ const EditorBarContainer = styled.div`
   padding: 10px 18px;
   flex: 0 1 auto;
   z-index: 2;
+  /* border-bottom: 1px solid ${(props) => props.theme.colors.secondaryBackground}; */
 `;
 
 const EditorBarTextContainer = styled.div`

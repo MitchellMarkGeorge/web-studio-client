@@ -1,9 +1,38 @@
-import { basicSetup, EditorView } from "codemirror";
-import React, { useEffect, useRef } from "react";
+import {
+  defaultKeymap,
+  history,
+  historyKeymap,
+  indentWithTab,
+} from "@codemirror/commands";
+import { javascript } from "@codemirror/lang-javascript";
+import {
+  defaultHighlightStyle,
+  foldGutter,
+  indentOnInput,
+  StreamLanguage,
+  syntaxHighlighting,
+  Language,
+  LanguageSupport,
+  foldKeymap,
+  bracketMatching,
+} from "@codemirror/language";
+import { Compartment, Extension } from "@codemirror/state";
+import {
+  drawSelection,
+  dropCursor,
+  EditorView,
+  highlightActiveLineGutter,
+  highlightSpecialChars,
+  keymap,
+  lineNumbers,
+} from "@codemirror/view";
+// import { basicSetup, EditorView } from "codemirror";
+import { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { useWebStudioState } from "../../../state";
 import { darktheme } from "./theme";
-import { javascript } from "@codemirror/lang-javascript";
+import { closeBrackets, closeBracketsKeymap } from "@codemirror/autocomplete";
+import { useMountedEffect } from "../../../hooks/useMountedEffect";
 
 // const enum EditorLanuage {
 //   J,
@@ -11,9 +40,10 @@ import { javascript } from "@codemirror/lang-javascript";
 
 interface Props {
   // code: string // might bcome usefull when saving to localStorage
-  language: any; // need to figure out what this looks like
-//   options: EditorLanuage; // need to figure out what this looks like
-  onCodeChange: () => void;
+  // language: Language | LanguageSupport; // need to figure out what this looks like
+  language: Extension; // should I use strings and the editor loads the language based on it or should I just pass it in???
+  //   options: EditorLanuage; // need to figure out what this looks like
+  // onCodeChange: () => void;
 }
 
 const CodeMirrorWrapper = styled.div`
@@ -23,23 +53,75 @@ const CodeMirrorWrapper = styled.div`
   /* display: flex; */
 `;
 
+export default function Editor(props: Props) {
+  const editorSettings = useWebStudioState((state) => state.editorSettings);
+  const { lineNumbersEnabled } = editorSettings;
 
-export default function Editor() {
   const container = useRef<HTMLDivElement | null>(null);
   const editorView = useRef<EditorView | null>(null);
-  const editorSettings = useWebStudioState(state => state.editorSettings);
-  // should the editor be at 100%?? 
+
+  const languageCompartment = useRef(new Compartment());
+  const lineNumberCompartment = useRef(new Compartment());
+  // should the editor be at 100%??
   // this technically is not nesseccary as the editor background and the layout background will be same color
 
   useEffect(() => {
     if (container.current && !editorView.current) {
+      console.log(container.current);
       editorView.current = new EditorView({
-        // extensions: [basicSetup, defaultTheme],
+        // extensions: [basicSetup, darktheme],
         // need to migrrate to @codemirror/view and configure things myself
-        extensions: [basicSetup, darktheme, javascript({ jsx: true })],
+        extensions: [
+          // need default extensions / config
+          lineNumberCompartment.current.of(
+            lineNumbersEnabled ? lineNumbers() : []
+          ),
+          // lineNumbers(),
+          syntaxHighlighting(defaultHighlightStyle, { fallback: true }),
+          darktheme,
+          highlightSpecialChars(),
+          history(),
+          languageCompartment.current.of(props.language),
+          highlightSpecialChars(),
+          history(),
+          foldGutter(),
+          drawSelection(),
+          dropCursor(),
+          indentOnInput(),
+          closeBrackets(),
+          // bracketMatching(),
+
+          keymap.of([
+            indentWithTab,
+            ...closeBracketsKeymap,
+            ...defaultKeymap,
+            ...historyKeymap,
+            ...foldKeymap,
+          ]),
+        ],
         parent: container.current,
       });
     }
+
+    // still need to destroy the editor on component unmount
+    // return () => editorView.current?.destroy();
   }, []);
+
+  // only call this after the inital mount
+  // useMountedEffect(() => {
+  //   // should not happen on first render
+  //   if (editorView.current) {
+  //     switchLanguage(props.language);
+  //   }
+  // }, [props.language]);
+
+  const switchLanguage = (language: Extension) => {
+    console.log("here switching language");
+    if (editorView.current) {
+      editorView.current.dispatch({
+        effects: languageCompartment.current.reconfigure(language),
+      });
+    }
+  };
   return <CodeMirrorWrapper ref={container} />;
 }

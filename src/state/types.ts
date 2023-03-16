@@ -20,11 +20,11 @@ export interface WebStudioState {
 }
 
 export interface EditorSettings {
-  lineNumbers: boolean;
-  enableLinting: boolean;
-  bracketMatching: boolean;
-  closeBrackets: boolean;
-  autocompletion: boolean;
+  lineNumbersEnabled: boolean;
+  lintingEnabled: boolean;
+  bracketMatchingEnabled: boolean;
+  closeBracketsEnabled: boolean;
+  autocompletionEnabled: boolean;
   // indentWithTab: boolean
   enableReletiveLineNumbers: boolean;
   formatOnSave: boolean
@@ -76,6 +76,7 @@ export const enum CSSPreset {
   DEFAULT = "CSS",
   SCSS = "SCSS",
   SASS = "SASS",
+  LESS = "Less"
 }
 
 export const enum HTMLPreset {
