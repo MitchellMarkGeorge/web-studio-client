@@ -1,7 +1,16 @@
 import React from 'react'
+import { EditorContainer, CodeMirrorContainer } from '../common/components'
+import EditorBar from '../EditorBar'
+import { SiHtml5 } from "@react-icons/all-files/si/SiHtml5";
+import Editor from '../Editor';
 
 export default function HTMLEditor() {
   return (
-    <div>HTMLEditor</div>
+    <EditorContainer>
+      <EditorBar icon={SiHtml5} editorName="HTML"/>
+      <CodeMirrorContainer>
+        <Editor/>
+      </CodeMirrorContainer>
+    </EditorContainer>
   )
 }

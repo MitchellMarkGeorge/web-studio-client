@@ -15,7 +15,7 @@ const TopBarContainer = styled.div`
   padding: 10px 12px;
   gap: 10px;
   color: ${(props) => props.theme.colors.primaryText};
-  font-size: 15px;
+  font-size: 16px; // 15??
   border-bottom: 1px solid ${(props) => props.theme.colors.secondaryBackground};
   flex: 0 1 auto;
 `;
@@ -62,20 +62,18 @@ export default function TopBar() {
       </TopBarLogoContainer>
       <div>{projectName || "Untitled"}</div>
       <TopBarButtonRowContainer>
-        <IconContext.Provider value={{ size: "16px" }}>
           <TopBarButton>
-            <FaPlay />
+            <FaPlay size={"14px"} />
             <div>Run</div>
           </TopBarButton>
-          <TopBarButton>
-            <FaPlay />
+          {/* <TopBarButton>
+            <FaPlay size={"14px"} />
             <div>Save</div>
-          </TopBarButton>
+          </TopBarButton> */}
           <TopBarButton>
-            <AiFillSetting />
+            <AiFillSetting  size={"14px"}/>
             <div>Settings</div>
           </TopBarButton>
-        </IconContext.Provider>
       </TopBarButtonRowContainer>
     </TopBarContainer>
   );

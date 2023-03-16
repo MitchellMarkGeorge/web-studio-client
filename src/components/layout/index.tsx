@@ -1,3 +1,5 @@
+import SplitPane from "./SplitPane";
+export default SplitPane 
 /* <SplitPane direction="horizontal"> // minSize, maxSize, defaultSize, step/increments, allowResize
     <SplitPne direction="vertical"> // this might also depend on direction
         <HTMLEditor/>

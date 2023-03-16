@@ -80,6 +80,6 @@ export const enum CSSPreset {
 
 export const enum HTMLPreset {
   DEFAULT = "HTML",
-  PUG = "Pug",
+  // PUG = "Pug",
   // TODO: think of other html presets
 }

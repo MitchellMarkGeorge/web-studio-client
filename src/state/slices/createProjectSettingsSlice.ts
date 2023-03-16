@@ -5,14 +5,15 @@ export const createProjectSettingsSlice: StateCreator<
   WebStudioState,
   [],
   [],
-  Pick<WebStudioState,  "projectSettings" | "updateProjectSettings">
+  Pick<WebStudioState, "projectSettings" | "updateProjectSettings">
 > = (set, get) => ({
-    projectSettings: {
-        projectName: "",
-        enableJs: true
-    },
-    updateProjectSettings: (settings) => {
-        console.log(settings);
-        // set jssettings to null
-    },
+  projectSettings: {
+    projectName: "",
+    enableJs: true,
+  },
+  updateProjectSettings: (settings) => {
+    const { projectSettings: previousProjectSettings } = get();
+    set({ projectSettings: Object.assign(previousProjectSettings, settings) });
+    // set jssettings to null
+  },
 });
