@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef, useMemo } from "react";
 import styled, { css } from "styled-components";
+import { useWebStudioState } from "../../state";
 import { getValidChildren } from "./utils";
 
 export type SplitPaneDirection = "horizontal" | "vertical";
@@ -18,7 +19,8 @@ const SplitPaneContainer = styled.div<DirectionProps>`
 
 const Divider = styled.div<DirectionProps & { isEnabled: boolean }>`
   background-color: ${(props) => props.theme.colors.secondaryBackground};
-  :hover,  :active {
+  z-index: 99;
+  :hover, :active {
     background-color: ${(props) => props.theme.colors.primaryAccent};
   }
   /* background-color: #242628; */
@@ -27,12 +29,20 @@ const Divider = styled.div<DirectionProps & { isEnabled: boolean }>`
       return css`
         height: 100%;
         width: 1px;
+        :hover, :active {
+          // think about this
+          width: 5px;
+        }
         ${props.isEnabled && "cursor: col-resize;"}/* cursor: col-resize; */
       `;
     } else
       return css`
         height: 1px;
         width: 100%;
+        :hover, :active {
+          // think about this
+          height: 5px;
+        }
         ${props.isEnabled && "cursor: row-resize;"}/* cursor: row-resize; */
       `;
   }}
@@ -81,10 +91,14 @@ export default function SplitPane({
     null
   );
 
+  const setIsPaneDragging = useWebStudioState(state => state.setIsPaneDragging);
+
   const paneNodes = useRef<HTMLDivElement[]>([]);
   const isMounted = useRef(false);
   const isHorizontal = direction === "horizontal";
   const onMouseUp = (e: MouseEvent) => {
+    console.log("hello");
+    setIsPaneDragging(false);
     setIsDragging(false);
     // think about this
     // setCurrentDividerIndex(null);
@@ -194,6 +208,7 @@ export default function SplitPane({
         // setInitalDividerPosition(e.clientY);
       }
       setCurrentDividerIndex(dividerIndex);
+      setIsPaneDragging(true);
       setIsDragging(true);
     }
   };

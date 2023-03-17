@@ -12,5 +12,9 @@ export const useWebStudioState = create<WebStudioState>(
     ...createEditorSettingsSlice(set, get, storeApi),
     ...createLanguageSettingsSlice(set, get, storeApi),
     ...createProjectSettingsSlice(set, get, storeApi),
+    isPaneDragging: false,
+    setIsPaneDragging: (isPaneDragging: boolean) => {
+      set({ isPaneDragging });
+    }
   })
 );

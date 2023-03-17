@@ -6,6 +6,7 @@ import logo from "../../assets/logo.svg";
 import { useWebStudioState } from "../../state";
 import { FaPlay } from "@react-icons/all-files/fa/FaPlay";
 import { AiFillSetting } from "@react-icons/all-files/ai/AiFillSetting";
+import { GiSaveArrow } from "@react-icons/all-files/gi/GiSaveArrow";
 
 const TopBarContainer = styled.div`
   display: flex;
@@ -62,14 +63,14 @@ export default function TopBar() {
       </TopBarLogoContainer>
       <div>{projectName || "Untitled"}</div>
       <TopBarButtonRowContainer>
-          <TopBarButton>
-            <FaPlay size={"14px"} />
-            <div>Run</div>
-          </TopBarButton>
           {/* <TopBarButton>
             <FaPlay size={"14px"} />
-            <div>Save</div>
+            <div>Run</div>
           </TopBarButton> */}
+          <TopBarButton>
+            <GiSaveArrow size={"14px"} />
+            <div>Save</div>
+          </TopBarButton>
           <TopBarButton>
             <AiFillSetting  size={"14px"}/>
             <div>Settings</div>

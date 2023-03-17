@@ -1,4 +1,7 @@
 export interface WebStudioState {
+  // hack to style the iframe while the split pane is being dragged
+  isPaneDragging: boolean;
+  setIsPaneDragging: (isPaneDragging: boolean) => void;
   javascriptCode: string;
   htmlCode: string;
   cssCode: string;

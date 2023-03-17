@@ -79,6 +79,7 @@ const mainTheme = EditorView.theme(
     ".cm-selectionMatch": { backgroundColor: "#aafe661a" },
 
     "&.cm-editor .cm-scroller": {
+      // need to customize scrollbar
       //   fontFamily:
       //     'Menlo, Monaco, Consolas, "Andale Mono", "Ubuntu Mono", "Courier New", monospace',
       // fontFamily:

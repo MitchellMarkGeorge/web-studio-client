@@ -27,7 +27,7 @@ import {
   lineNumbers,
 } from "@codemirror/view";
 // import { basicSetup, EditorView } from "codemirror";
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import styled from "styled-components";
 import { useWebStudioState } from "../../../state";
 import { darktheme } from "./theme";
@@ -43,7 +43,7 @@ interface Props {
   // language: Language | LanguageSupport; // need to figure out what this looks like
   language: Extension; // should I use strings and the editor loads the language based on it or should I just pass it in???
   //   options: EditorLanuage; // need to figure out what this looks like
-  // onCodeChange: () => void;
+  onCodeChange: (code: string) => void;
 }
 
 const CodeMirrorWrapper = styled.div`
@@ -65,9 +65,21 @@ export default function Editor(props: Props) {
   // should the editor be at 100%??
   // this technically is not nesseccary as the editor background and the layout background will be same color
 
+  const codeChangeListener = useMemo(
+    () =>
+      EditorView.updateListener.of((update) => {
+        if (update.docChanged) {
+          const { doc } = update.state;
+          // console.log(doc.toString());
+          props.onCodeChange(doc.toString());
+          // props.onCodeChange(doc.toString())
+        }
+      }),
+    [props.onCodeChange]
+  );
+
   useEffect(() => {
     if (container.current && !editorView.current) {
-      console.log(container.current);
       editorView.current = new EditorView({
         // extensions: [basicSetup, darktheme],
         // need to migrrate to @codemirror/view and configure things myself
@@ -89,6 +101,7 @@ export default function Editor(props: Props) {
           dropCursor(),
           indentOnInput(),
           closeBrackets(),
+          codeChangeListener,
           // bracketMatching(),
 
           keymap.of([
@@ -106,6 +119,11 @@ export default function Editor(props: Props) {
     // still need to destroy the editor on component unmount
     // return () => editorView.current?.destroy();
   }, []);
+
+  // should only be called on compeonent unmount
+  // useEffect(() => {
+  //   return () => editorView.current?.destroy();
+  // }, [])
 
   // only call this after the inital mount
   // useMountedEffect(() => {
