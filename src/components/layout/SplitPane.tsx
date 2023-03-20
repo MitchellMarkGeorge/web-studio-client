@@ -19,7 +19,7 @@ const SplitPaneContainer = styled.div<DirectionProps>`
 
 const Divider = styled.div<DirectionProps & { isEnabled: boolean }>`
   background-color: ${(props) => props.theme.colors.secondaryBackground};
-  z-index: 99;
+  /* z-index: 99; */
   :hover, :active {
     background-color: ${(props) => props.theme.colors.primaryAccent};
   }
@@ -97,7 +97,6 @@ export default function SplitPane({
   const isMounted = useRef(false);
   const isHorizontal = direction === "horizontal";
   const onMouseUp = (e: MouseEvent) => {
-    console.log("hello");
     setIsPaneDragging(false);
     setIsDragging(false);
     // think about this

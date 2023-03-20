@@ -58,6 +58,7 @@ export const GlobalStyle = createGlobalStyle`
     html, body, #root {
         width: 100%;
         height: 100%;
+        /* position: relative; */
         // might try and include in sf pro font itself instead of using this
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;

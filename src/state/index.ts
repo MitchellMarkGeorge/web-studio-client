@@ -15,6 +15,10 @@ export const useWebStudioState = create<WebStudioState>(
     isPaneDragging: false,
     setIsPaneDragging: (isPaneDragging: boolean) => {
       set({ isPaneDragging });
+    },
+    showModal: false,
+    setShowModal: (showModal: boolean) => {
+      set({ showModal });
     }
   })
 );

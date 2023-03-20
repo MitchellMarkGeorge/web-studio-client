@@ -20,6 +20,8 @@ export interface WebStudioState {
   updateEditorSettings: (settings: Partial<EditorSettings>) => void;
   projectSettings: ProjectSettings;
   updateProjectSettings: (settings: Partial<ProjectSettings>) => void;
+  showModal: boolean;
+  setShowModal: (showModal: boolean) => void
 }
 
 export interface EditorSettings {
@@ -39,8 +41,8 @@ export interface EditorSettings {
 
 export interface WebStudioSettings {
   autoSave: boolean;
-  readonly: boolean;
-  colorScheme: "light" | "dark";
+  // readonly: boolean;
+  // colorScheme: "light" | "dark";
   layout: "colunm" | "row" | "tabs"
 }
 

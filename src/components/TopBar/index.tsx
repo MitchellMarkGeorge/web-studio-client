@@ -51,10 +51,17 @@ const TopBarButton = styled.div`
   padding-top: 10px;
   padding-bottom: 10px;
   gap: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  user-select: none;
+  /* :hover {
+    filter: brightness(80%);
+  } */
 `;
 
 export default function TopBar() {
   const { projectName } = useWebStudioState((state) => state.projectSettings);
+  const setShowModal = useWebStudioState(state => state.setShowModal);
   return (
     <TopBarContainer>
       <TopBarLogoContainer href="/">
@@ -71,7 +78,7 @@ export default function TopBar() {
             <GiSaveArrow size={"14px"} />
             <div>Save</div>
           </TopBarButton>
-          <TopBarButton>
+          <TopBarButton onClick={() => setShowModal(true)}>
             <AiFillSetting  size={"14px"}/>
             <div>Settings</div>
           </TopBarButton>

@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
 import { useWebStudioState } from "../../state";
 import logo from "../../assets/logo.svg";
+import dedent from "ts-dedent";
 
 const PreviewFrame = styled.iframe<{ isPaneDragging: boolean}>`
   flex: 1;
@@ -86,7 +87,7 @@ export default function Preview() {
 
   // external js and css
   // console.log(htmlCode);
-  const buildSrcDoc = () => `
+  const buildSrcDoc = () => dedent`
     <!DOCTYPE html>
     <html lang="en">
       <head>

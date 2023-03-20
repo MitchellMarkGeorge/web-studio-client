@@ -4,6 +4,8 @@ import { darkTheme } from "./style/theme";
 import TopBar from "./components/TopBar";
 import WebStudioEditor from "./components/WebStudioEditor";
 import { useWebStudioState } from "./state";
+import { useState } from "react";
+import SettingsModal from "./components/SettingsModal";
 
 const WebStudioContainer = styled.div`
   height: 100%;
@@ -15,10 +17,13 @@ const WebStudioContainer = styled.div`
 
 function App() {
   const projectSettings = useWebStudioState((state) => state.projectSettings);
+  const showModal = useWebStudioState(state => state.showModal);
+  const setShowModal = useWebStudioState(state => state.setShowModal);
 
   return (
     <ThemeProvider theme={darkTheme}>
       <GlobalStyle />
+        <SettingsModal showModal={showModal} setShowModal={setShowModal}/>
       <WebStudioContainer>
         <TopBar />
         <WebStudioEditor isJsEnabled={projectSettings.enableJs} />
