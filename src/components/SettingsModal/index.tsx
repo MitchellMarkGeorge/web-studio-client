@@ -22,7 +22,7 @@ const Background = styled.div`
 
 const ModalWrapper = styled.div`
   position: relative;
-  /* width: 800px; */
+  width: 800px;
   /* width: 800px; */
   height: 500px;
   // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -62,6 +62,8 @@ const SettingMenuButton = styled.div<{ isSelected: boolean }>`
   justify-content: center;
   border-radius: 8px;
   padding: 10px;
+  font-size: 14px;
+  flex: 1;
   color: ${(props) => props.theme.colors.primaryText};
   cursor: pointer;
   background-color: ${(props) =>
@@ -135,6 +137,7 @@ const SelectedSettingSection =  Object.values(settingSections)[selectedMenuItem]
                 <SettingMenuButton isSelected={false}>CSS</SettingMenuButton> */}
               </SettingMenuButtonContainer>
               {<SelectedSettingSection/>}
+
             </SettingMenuConainter>
           </ModalWrapper>
         </Background>

@@ -13,7 +13,12 @@ export const createProjectSettingsSlice: StateCreator<
   },
   updateProjectSettings: (settings) => {
     const { projectSettings: previousProjectSettings } = get();
-    set({ projectSettings: Object.assign(previousProjectSettings, settings) });
+    const updatedSettings = Object.assign(previousProjectSettings, settings);
+    if (settings.enableJs === false) {
+      set({ projectSettings: updatedSettings, javascriptCode: "" });
+    } else {
+      set({ projectSettings: updatedSettings });
+    }
     // set jssettings to null
   },
 });

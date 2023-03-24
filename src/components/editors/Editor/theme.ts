@@ -48,11 +48,11 @@ const mainTheme = EditorView.theme(
       fontFamily:
         '"Fira Code", Menlo, Monaco, Consolas, "Andale Mono", "Ubuntu Mono", "Courier New", monospace',
       backgroundColor: "#161718",
+      // backgroundColor: "#242628",
       color: foreground,
       fontWeight: 300,
       lineHeight: "150%",
       padding: "10px",
-      // backgroundColor: background,
     },
 
     ".cm-content": {
@@ -63,7 +63,11 @@ const mainTheme = EditorView.theme(
     "&.cm-focused .cm-selectionBackground, .cm-selectionBackground, .cm-content ::selection":
       { backgroundColor: selection },
 
-    ".cm-panels": { backgroundColor:"#161718", color: foreground },
+    ".cm-panels": {
+      backgroundColor:"#161718",
+      // backgroundColor: "#242628",
+      color: foreground,
+    },
     ".cm-panels.cm-panels-top": { borderBottom: "2px solid black" },
     ".cm-panels.cm-panels-bottom": { borderTop: "2px solid black" },
 
@@ -79,6 +83,7 @@ const mainTheme = EditorView.theme(
     ".cm-selectionMatch": { backgroundColor: "#aafe661a" },
 
     "&.cm-editor .cm-scroller": {
+      overflow: "auto",
       // need to customize scrollbar
       //   fontFamily:
       //     'Menlo, Monaco, Consolas, "Andale Mono", "Ubuntu Mono", "Courier New", monospace',
@@ -94,8 +99,8 @@ const mainTheme = EditorView.theme(
     },
 
     ".cm-gutters": {
-      //   backgroundColor: background,
       backgroundColor: "#161718",
+      // backgroundColor: "#242628",
       color: "#858585",
       border: "none",
       // paddingLeft: "10px"

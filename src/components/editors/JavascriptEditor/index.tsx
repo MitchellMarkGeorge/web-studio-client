@@ -17,10 +17,11 @@ export default function JavascriptEditor() {
   };
   return (
     <EditorContainer>
+      {/* <EditorBar icon={SiJavascript} editorName="Javascript" iconColor="yellow" /> */}
       <EditorBar icon={SiJavascript} editorName="Javascript" />
       <CodeMirrorContainer>
         <Editor
-          language={javascript()}
+          language={javascript({ jsx: true})}
           onCodeChange={debounce(onJavascriptChange, 500)}
         />
       </CodeMirrorContainer>

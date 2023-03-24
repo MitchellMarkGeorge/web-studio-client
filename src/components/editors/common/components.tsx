@@ -17,3 +17,5 @@ export const CodeMirrorContainer = styled.div`
   /* align-items: center; */
   /* justify-content: center; */
 `;
+
+// fix scrollbar

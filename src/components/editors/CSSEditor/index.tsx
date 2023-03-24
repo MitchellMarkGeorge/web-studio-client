@@ -15,6 +15,7 @@ export default function CSSEditor() {
   };
   return (
     <EditorContainer>
+      {/* <EditorBar icon={SiCss3} editorName="CSS" iconColor="#5896d0"/> */}
       <EditorBar icon={SiCss3} editorName="CSS" />
       <CodeMirrorContainer>
         <Editor language={css()} onCodeChange={debounce(onCssChanged, 500)} />

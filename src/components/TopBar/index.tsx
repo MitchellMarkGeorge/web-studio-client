@@ -19,6 +19,8 @@ const TopBarContainer = styled.div`
   font-size: 16px; // 15??
   border-bottom: 1px solid ${(props) => props.theme.colors.secondaryBackground};
   flex: 0 1 auto;
+  /* background-color: ${props => props.theme.colors.primaryBackground}; */
+  background-color: #111;
 `;
 
 const TopBarLogoContainer = styled.a`
@@ -50,6 +52,8 @@ const TopBarButton = styled.div`
   align-items: center;
   padding-top: 10px;
   padding-bottom: 10px;
+  /* padding: 10px; */
+  /* background-color: ${props => props.theme.colors.primaryAccent}; */
   gap: 5px;
   border-radius: 5px;
   cursor: pointer;

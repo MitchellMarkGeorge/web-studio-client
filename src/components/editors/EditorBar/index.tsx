@@ -8,7 +8,8 @@ const EditorBarContainer = styled.div`
   flex-direction: row;
   // think about this padding
   padding: 10px 18px;
-  flex: 0 1 auto;
+  /* flex: 0 1 auto; */
+  /* background-color: #111; */
   /* z-index: 2; */
   /* border-bottom: 1px solid ${(props) => props.theme.colors.secondaryBackground}; */
 `;
@@ -27,6 +28,7 @@ const EditorBarTextContainer = styled.div`
 interface Props {
   icon: IconType; 
   editorName: string;
+  iconColor?: string
 }
 
 export default function EditorBar({ editorName, icon: Icon }: Props) {

@@ -14,7 +14,8 @@ export default function HTMLEditor() {
   };
   return (
     <EditorContainer>
-      <EditorBar icon={SiHtml5} editorName="HTML" />
+      {/* <EditorBar icon={SiHtml5} editorName="HTML" iconColor="#df7743" /> */}
+      <EditorBar icon={SiHtml5} editorName="HTML"/>
       <CodeMirrorContainer>
         <Editor language={html()} onCodeChange={debounce(onHtmlChanged, 500)} />
       </CodeMirrorContainer>
