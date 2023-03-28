@@ -7,7 +7,9 @@ const EditorBarContainer = styled.div`
   display: flex;
   flex-direction: row;
   // think about this padding
-  padding: 10px 18px;
+  padding-left: 18px;
+  padding-right: 18px;
+  padding-top: 18px;
   /* flex: 0 1 auto; */
   /* background-color: #111; */
   /* z-index: 2; */

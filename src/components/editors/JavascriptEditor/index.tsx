@@ -21,7 +21,7 @@ export default function JavascriptEditor() {
       <EditorBar icon={SiJavascript} editorName="Javascript" />
       <CodeMirrorContainer>
         <Editor
-          language={javascript({ jsx: true})}
+          language={javascript({ jsx: true })}
           onCodeChange={debounce(onJavascriptChange, 500)}
         />
       </CodeMirrorContainer>

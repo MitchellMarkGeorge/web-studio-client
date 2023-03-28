@@ -88,13 +88,12 @@ export default function SettingsModal({ showModal, setShowModal }: Props) {
   // will just make this into 2 arrays
   const settingSections = {
     // "Studio": StudioSettings,
-    "Project": ProjectSettings,
-    "Editor": StudioSettings,
-    "JavaScript": StudioSettings,
-    "HTML": StudioSettings,
-    "CSS": StudioSettings,
-
-  }
+    Project: ProjectSettings,
+    Editor: StudioSettings,
+    JavaScript: StudioSettings,
+    HTML: StudioSettings,
+    CSS: StudioSettings,
+  };
 
   const onKeyPress = useCallback(
     (event: KeyboardEvent) => {
@@ -116,7 +115,8 @@ export default function SettingsModal({ showModal, setShowModal }: Props) {
     return () => document.removeEventListener("keydown", onKeyPress);
   });
 
-const SelectedSettingSection =  Object.values(settingSections)[selectedMenuItem];
+  const SelectedSettingSection =
+    Object.values(settingSections)[selectedMenuItem];
   return (
     <>
       {showModal ? (
@@ -126,9 +126,15 @@ const SelectedSettingSection =  Object.values(settingSections)[selectedMenuItem]
             <SettingMenuConainter>
               <SettingsHeading>Settings</SettingsHeading>
               <SettingMenuButtonContainer>
-              {Object.keys(settingSections).map((sectionName, index) => (
-                <SettingMenuButton key={sectionName} onClick={() => setSelectedMenuItem(index)} isSelected={selectedMenuItem === index}>{sectionName}</SettingMenuButton>
-              ))}
+                {Object.keys(settingSections).map((sectionName, index) => (
+                  <SettingMenuButton
+                    key={sectionName}
+                    onClick={() => setSelectedMenuItem(index)}
+                    isSelected={selectedMenuItem === index}
+                  >
+                    {sectionName}
+                  </SettingMenuButton>
+                ))}
                 {/* <SettingMenuButton isSelected>Studio</SettingMenuButton>
                 <SettingMenuButton isSelected={false}>Project</SettingMenuButton>
                 <SettingMenuButton isSelected={false}>Editor</SettingMenuButton>
@@ -136,8 +142,7 @@ const SelectedSettingSection =  Object.values(settingSections)[selectedMenuItem]
                 <SettingMenuButton isSelected={false}>HTML</SettingMenuButton>
                 <SettingMenuButton isSelected={false}>CSS</SettingMenuButton> */}
               </SettingMenuButtonContainer>
-              {<SelectedSettingSection/>}
-
+              {<SelectedSettingSection />}
             </SettingMenuConainter>
           </ModalWrapper>
         </Background>
