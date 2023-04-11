@@ -21,7 +21,6 @@ import {
   drawSelection,
   dropCursor,
   EditorView,
-  highlightActiveLineGutter,
   highlightSpecialChars,
   keymap,
   lineNumbers,
@@ -33,10 +32,6 @@ import { useWebStudioState } from "../../../state";
 import { darktheme } from "./theme";
 import { closeBrackets, closeBracketsKeymap } from "@codemirror/autocomplete";
 import { useMountedEffect } from "../../../hooks/useMountedEffect";
-
-// const enum EditorLanuage {
-//   J,
-// }
 
 interface Props {
   // code: string // might bcome usefull when saving to localStorage

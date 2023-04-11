@@ -6,19 +6,20 @@ import logo from "../../assets/logo.svg";
 import { useWebStudioState } from "../../state";
 import { FaPlay } from "@react-icons/all-files/fa/FaPlay";
 import { AiFillSetting } from "@react-icons/all-files/ai/AiFillSetting";
-import { GiSaveArrow } from "@react-icons/all-files/gi/GiSaveArrow";
+// import { HiPlay } from "@react-icons/all-files/hi/HiPlay";
+import { HiPlay } from "react-icons/hi2"
 
 const TopBarContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 12px;
-  gap: 10px;
+  padding: 0.75em 1rem;
+  /* gap: 10px; */ // why gap
   color: ${(props) => props.theme.colors.primaryText};
-  font-size: 16px; // 15??
+  font-size: 0.94rem; 
   border-bottom: 1px solid ${(props) => props.theme.colors.secondaryBackground};
-  flex: 0 1 auto;
+  flex: 0 1 auto; // isnt this the default???
   /* background-color: ${props => props.theme.colors.primaryBackground}; */
   background-color: #111;
 `;
@@ -27,7 +28,10 @@ const TopBarLogoContainer = styled.a`
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 10px;
+  /* gap: 10px; */
+  gap: 0.63rem;
+  /* font-size: 1.13rem; */
+  font-size: 1rem;
   font-weight: 400;
   text-decoration: none;
   color: ${(props) => props.theme.colors.primaryText};
@@ -35,33 +39,40 @@ const TopBarLogoContainer = styled.a`
 `;
 
 const TopBarLogo = styled.img`
-  height: 30px;
-  width: 30px;
+  /* height: 30px;
+  width: 30px; */
+  height: 2rem;
+  width: 2rem;
 `;
 
 const TopBarButtonRowContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  gap: 16px;
+  /* gap: 16px; */
+  gap: 1rem;
 `;
 
-const TopBarButton = styled.div`
+const TopBarButton = styled.button`
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  /* padding: 10px; */
-  /* background-color: ${props => props.theme.colors.primaryAccent}; */
-  gap: 5px;
-  border-radius: 5px;
-  cursor: pointer;
-  user-select: none;
-  /* :hover {
-    filter: brightness(80%);
-  } */
+  /* padding: 0.625rem; */
+  // think about this
+  /* padding: 0.38rem 0.5rem; */
+  padding: 0.5rem;
+  /* font-size: 0.94rem; */
+  background-color: ${props => props.theme.colors.primaryAccent};
+  font-weight: 400;
+  gap: 0.31rem;
+  border-radius: 0.5rem;
+  :hover {
+    // figure out hover color
+    /* filter: brightness(80%); */
+    background-color: #0452b7;
+  }
 `;
+
 
 export default function TopBar() {
   const { projectName } = useWebStudioState((state) => state.projectSettings);
@@ -74,17 +85,13 @@ export default function TopBar() {
       </TopBarLogoContainer>
       <div>{projectName || "Untitled"}</div>
       <TopBarButtonRowContainer>
-          {/* <TopBarButton>
-            <FaPlay size={"14px"} />
-            <div>Run</div>
-          </TopBarButton> */}
           <TopBarButton>
-            <GiSaveArrow size={"14px"} />
-            <div>Save</div>
+            <HiPlay size={"1rem"} />
+            <span>Run</span>
           </TopBarButton>
           <TopBarButton onClick={() => setShowModal(true)}>
-            <AiFillSetting  size={"14px"}/>
-            <div>Settings</div>
+            <AiFillSetting  size={"1rem"}/>
+            <span>Settings</span>
           </TopBarButton>
       </TopBarButtonRowContainer>
     </TopBarContainer>

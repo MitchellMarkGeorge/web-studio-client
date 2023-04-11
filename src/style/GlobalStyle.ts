@@ -49,19 +49,33 @@ export const GlobalStyle = createGlobalStyle`
         font-style: normal;
     }
 
-    * {
+    *, ::after, ::before {
         box-sizing: border-box;
         margin: 0;
         padding: 0;
-        font-variant-ligatures: contextual; // allow ligarutes
+        /* font-variant-ligatures: contextual; // allow ligarutes */
     }
+
+    html {
+        /* line-height: 1.5; */
+    }
+
     html, body, #root {
         width: 100%;
         height: 100%;
+        -webkit-font-smoothing: antialiased;
+        /* line-height: 1.5; */
         /* position: relative; */
         // might try and include in sf pro font itself instead of using this
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
   letter-spacing: normal !important;
+    }
+
+    button {
+        font: inherit;
+        color: inherit;
+        border: none;
+        cursor: pointer;
     }
 `;

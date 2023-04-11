@@ -18,30 +18,50 @@ const SplitPaneContainer = styled.div<DirectionProps>`
 `;
 
 const Divider = styled.div<DirectionProps & { isEnabled: boolean }>`
+  // styles besed on react-split-pane
+  background-clip: padding-box; // makes borders tansparent
   background-color: ${(props) => props.theme.colors.secondaryBackground};
-  /* z-index: 99; */
-  :hover, :active {
-    background-color: ${(props) => props.theme.colors.primaryAccent};
+  /* background-color: #000; */
+  z-index: 1;
+
+  :hover {
+    // think about this
+    transition: all 0.3s ease;
   }
+
   /* background-color: #242628; */
   ${(props) => {
     if (props.direction === "horizontal") {
       return css`
         height: 100%;
-        width: 1px;
-        :hover, :active {
-          // think about this
-          width: 5px;
+        width: 11px;
+        margin: 0 -5px;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        :hover {
+          /* border-left: 5px solid ${(props) => props.theme.colors.primaryAccent};
+          border-right: 5px solid ${(props) => props.theme.colors.primaryAccent}; */
+          border-left: 5px solid rgba(17, 17, 17, 0.5);
+          border-right: 5px solid rgba(17, 17, 17, 0.5);
+          /* opacity: 0.5; */
         }
         ${props.isEnabled && "cursor: col-resize;"}/* cursor: col-resize; */
       `;
     } else
       return css`
-        height: 1px;
+        height: 11px;
         width: 100%;
-        :hover, :active {
-          // think about this
-          height: 5px;
+        /* margin: -5px 5px; */
+        margin: 0;
+        border-top: 5px solid transparent; 
+        border-bottom: 5px solid transparent;
+        :hover {
+          // think about the color
+          /* border-top: 5px solid ${(props) => props.theme.colors.primaryAccent};
+          border-bottom: 5px solid ${(props) => props.theme.colors.primaryAccent}; */
+          border-top: 5px solid rgba(17, 17, 17, 0.5);
+          border-bottom: 5px solid rgba(17, 17, 17, 0.5);
+          /* opacity: 0.3; */
         }
         ${props.isEnabled && "cursor: row-resize;"}/* cursor: row-resize; */
       `;
@@ -91,7 +111,9 @@ export default function SplitPane({
     null
   );
 
-  const setIsPaneDragging = useWebStudioState(state => state.setIsPaneDragging);
+  const setIsPaneDragging = useWebStudioState(
+    (state) => state.setIsPaneDragging
+  );
 
   const paneNodes = useRef<HTMLDivElement[]>([]);
   const isMounted = useRef(false);
