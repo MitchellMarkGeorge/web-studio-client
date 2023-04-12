@@ -1,19 +1,19 @@
 import React from "react";
-import { CodeMirrorContainer, EditorContainer } from "../common/components";
+import { CodeMirrorContainer, EditorContainer } from "../components/components";
 import EditorBar from "../EditorBar";
 import { SiJavascript } from "@react-icons/all-files/si/SiJavascript";
 import Editor from "../Editor";
 import { javascript } from "@codemirror/lang-javascript";
-import { useWebStudioState } from "../../../state";
 import debounce from "lodash.debounce";
+import { useWorkspaceContext } from "../../../contexts/WorkspaceContext";
 
 export default function JavascriptEditor() {
-  const updateCode = useWebStudioState((state) => state.updateCode);
+  const { saveJs } = useWorkspaceContext();
 
   // should wrap in both useCallback and debounce
   const onJavascriptChange = (code: string) => {
     // console.log(code);
-    updateCode("js", code);
+    saveJs(code);
   };
   return (
     <EditorContainer>

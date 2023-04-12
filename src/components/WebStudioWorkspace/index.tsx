@@ -5,7 +5,7 @@ import { CSSEditor, HTMLEditor, JavascriptEditor } from "../editors";
 import SplitPane from "../layout";
 import Preview from "../Preview";
 
-const WebStudioEditorContainer = styled.div`
+const WebStudioWorkspaceContainer = styled.div`
   height: 100%;
   width: 100%;
   flex: 1;
@@ -15,9 +15,9 @@ interface Props {
   isJsEnabled: boolean;
 }
 
-export default function WebStudioEditor(props: Props) {
+export default function WebStudioWorkspace(props: Props) {
   return (
-    <WebStudioEditorContainer>
+    <WebStudioWorkspaceContainer>
       <SplitPane direction="horizontal">
         <SplitPane direction="vertical">
           <HTMLEditor/>
@@ -26,6 +26,6 @@ export default function WebStudioEditor(props: Props) {
         </SplitPane>
         <Preview/>
       </SplitPane>
-    </WebStudioEditorContainer>
+    </WebStudioWorkspaceContainer>
   );
 }

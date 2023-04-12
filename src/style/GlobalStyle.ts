@@ -63,7 +63,7 @@ export const GlobalStyle = createGlobalStyle`
     html, body, #root {
         width: 100%;
         height: 100%;
-        -webkit-font-smoothing: antialiased;
+        /* -webkit-font-smoothing: antialiased; */
         /* line-height: 1.5; */
         /* position: relative; */
         // might try and include in sf pro font itself instead of using this

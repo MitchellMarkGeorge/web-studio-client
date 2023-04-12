@@ -24,10 +24,10 @@ const Divider = styled.div<DirectionProps & { isEnabled: boolean }>`
   /* background-color: #000; */
   z-index: 1;
 
-  :hover {
+  /* :hover {
     // think about this
     transition: all 0.3s ease;
-  }
+  } */
 
   /* background-color: #242628; */
   ${(props) => {
@@ -36,6 +36,7 @@ const Divider = styled.div<DirectionProps & { isEnabled: boolean }>`
         height: 100%;
         width: 11px;
         margin: 0 -5px;
+        /* margin: 0; */
         border-left: 5px solid transparent;
         border-right: 5px solid transparent;
         :hover {
@@ -52,7 +53,8 @@ const Divider = styled.div<DirectionProps & { isEnabled: boolean }>`
         height: 11px;
         width: 100%;
         /* margin: -5px 5px; */
-        margin: 0;
+        margin: -5px 0;
+        // margin: 0; // also works
         border-top: 5px solid transparent; 
         border-bottom: 5px solid transparent;
         :hover {

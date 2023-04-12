@@ -1,5 +1,4 @@
 import { create } from "zustand";
-import { createCodeSettingsSlice } from "./slices/createCodeSlice";
 import { createEditorSettingsSlice } from "./slices/createEditorSettingsSlice";
 import { createLanguageSettingsSlice } from "./slices/createLanguageSettingSlice";
 import { createProjectSettingsSlice } from "./slices/createProjectSettingsSlice";
@@ -8,17 +7,20 @@ import {
 } from "./types";
 export const useWebStudioState = create<WebStudioState>(
   (set, get, storeApi) => ({
-    ...createCodeSettingsSlice(set, get, storeApi),
     ...createEditorSettingsSlice(set, get, storeApi),
     ...createLanguageSettingsSlice(set, get, storeApi),
     ...createProjectSettingsSlice(set, get, storeApi),
     isPaneDragging: false,
-    setIsPaneDragging: (isPaneDragging: boolean) => {
+    setIsPaneDragging: (isPaneDragging) => {
       set({ isPaneDragging });
     },
     showModal: false,
-    setShowModal: (showModal: boolean) => {
+    setShowModal: (showModal) => {
       set({ showModal });
-    }
-  })
+    },
+    previewUrl: "",
+    setPreviewUrl: (previewUrl) => {
+        set({ previewUrl })
+    },
+  }),
 );

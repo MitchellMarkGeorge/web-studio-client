@@ -7,7 +7,9 @@ import { useWebStudioState } from "../../state";
 import { FaPlay } from "@react-icons/all-files/fa/FaPlay";
 import { AiFillSetting } from "@react-icons/all-files/ai/AiFillSetting";
 // import { HiPlay } from "@react-icons/all-files/hi/HiPlay";
-import { HiPlay } from "react-icons/hi2"
+import { HiPlay } from "react-icons/hi2";
+import { useWorkspaceContext } from "../../contexts/WorkspaceContext";
+import { buildPreviewUrl } from "../../services/preview";
 
 const TopBarContainer = styled.div`
   display: flex;
@@ -17,10 +19,11 @@ const TopBarContainer = styled.div`
   padding: 0.75em 1rem;
   /* gap: 10px; */ // why gap
   color: ${(props) => props.theme.colors.primaryText};
-  font-size: 0.94rem; 
+  /* font-size: 0.94rem;  */
+  font-size: 1rem;
   border-bottom: 1px solid ${(props) => props.theme.colors.secondaryBackground};
   flex: 0 1 auto; // isnt this the default???
-  /* background-color: ${props => props.theme.colors.primaryBackground}; */
+  /* background-color: ${(props) => props.theme.colors.primaryBackground}; */
   background-color: #111;
 `;
 
@@ -61,8 +64,9 @@ const TopBarButton = styled.button`
   // think about this
   /* padding: 0.38rem 0.5rem; */
   padding: 0.5rem;
+  /* padding: 0.625rem; */
   /* font-size: 0.94rem; */
-  background-color: ${props => props.theme.colors.primaryAccent};
+  background-color: ${(props) => props.theme.colors.primaryAccent};
   font-weight: 400;
   gap: 0.31rem;
   border-radius: 0.5rem;
@@ -73,10 +77,17 @@ const TopBarButton = styled.button`
   }
 `;
 
-
 export default function TopBar() {
+  // problem with this is that the top bar re renders whenever the code changes
+  const { runCode } = useWorkspaceContext();
+
   const { projectName } = useWebStudioState((state) => state.projectSettings);
-  const setShowModal = useWebStudioState(state => state.setShowModal);
+  // const updateCode = useWebStudioState(state => state.updateCode);
+  const setShowModal = useWebStudioState((state) => state.setShowModal);
+  // const setPreviewUrl = useWebStudioState(state => state.setPreviewUrl)
+  console.log("re-rendering");
+
+  // const project
   return (
     <TopBarContainer>
       <TopBarLogoContainer href="/">
@@ -85,14 +96,14 @@ export default function TopBar() {
       </TopBarLogoContainer>
       <div>{projectName || "Untitled"}</div>
       <TopBarButtonRowContainer>
-          <TopBarButton>
-            <HiPlay size={"1rem"} />
-            <span>Run</span>
-          </TopBarButton>
-          <TopBarButton onClick={() => setShowModal(true)}>
-            <AiFillSetting  size={"1rem"}/>
-            <span>Settings</span>
-          </TopBarButton>
+        <TopBarButton onClick={runCode}>
+          <HiPlay size={"1rem"} />
+          <span>Run</span>
+        </TopBarButton>
+        <TopBarButton onClick={() => setShowModal(true)}>
+          <AiFillSetting size={"1rem"} />
+          <span>Settings</span>
+        </TopBarButton>
       </TopBarButtonRowContainer>
     </TopBarContainer>
   );

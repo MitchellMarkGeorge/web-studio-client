@@ -2,10 +2,10 @@ export interface WebStudioState {
   // hack to style the iframe while the split pane is being dragged
   isPaneDragging: boolean;
   setIsPaneDragging: (isPaneDragging: boolean) => void;
-  javascriptCode: string;
-  htmlCode: string;
-  cssCode: string;
-  updateCode: (language: "js" | "html" | "css", code: string) => void;
+  // javascriptCode: string;
+  // htmlCode: string;
+  // cssCode: string;
+  // updateCode: (code: { js: string, html: string, css: string}) => void;
   javascriptSettings: JavascriptSettings | null; // can be disabled -- so should it be null?
   htmlSettings: HTMLSettings;
   cssSettings: CSSSettings;
@@ -22,6 +22,8 @@ export interface WebStudioState {
   updateProjectSettings: (settings: Partial<ProjectSettings>) => void;
   showModal: boolean;
   setShowModal: (showModal: boolean) => void
+  previewUrl: string
+  setPreviewUrl: (previewUrl: string) => void
 }
 
 export interface EditorSettings {
