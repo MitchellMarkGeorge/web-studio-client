@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
 import { useWebStudioState } from "../../state";
 import { CSSEditor, HTMLEditor, JavascriptEditor } from "../editors";
@@ -16,6 +16,11 @@ interface Props {
 }
 
 export default function WebStudioWorkspace(props: Props) {
+  // the idea behind this is to get the intancces of the codemirror editor object for each editor
+
+  const htmlEditorInstance = useRef();
+  const cssEditorInstance = useRef();
+  const jsEditorInstance = useRef();
   return (
     <WebStudioWorkspaceContainer>
       <SplitPane direction="horizontal">

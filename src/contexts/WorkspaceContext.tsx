@@ -8,6 +8,10 @@ import { buildPreviewUrl } from "../services/preview";
 // will try looking for a better way to handle this (hopefully wihtout using context/duplication of data)
 
 // the best option would be to only get the code from the ediotrs when the run button is pressed and build eveythign accordingly
+// even that approach is not entirely fool proof - this entire system depends on the fact that the previewUrl's hash changes everytime the URL.createObjectURL is called
+// if I make the preview static/hosted in the backend, this system won't work (although that might be easier as it would just be a matter of sending the code to the server and the webpage rebuilding and refreshing)
+
+// for now this works
 
 interface WorkspaceContextType {
   js: string;

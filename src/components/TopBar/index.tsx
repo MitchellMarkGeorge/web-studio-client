@@ -63,7 +63,7 @@ const TopBarButton = styled.button`
   /* padding: 0.625rem; */
   // think about this
   /* padding: 0.38rem 0.5rem; */
-  padding: 0.5rem;
+  padding: 0.5rem 0.75rem;
   /* padding: 0.625rem; */
   /* font-size: 0.94rem; */
   background-color: ${(props) => props.theme.colors.primaryAccent};
@@ -72,6 +72,7 @@ const TopBarButton = styled.button`
   border-radius: 0.5rem;
   :hover {
     // figure out hover color
+    transition: all 0.3s ease;
     /* filter: brightness(80%); */
     background-color: #0452b7;
   }
