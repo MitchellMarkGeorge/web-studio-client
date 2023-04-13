@@ -6,7 +6,7 @@ export interface WebStudioState {
   // htmlCode: string;
   // cssCode: string;
   // updateCode: (code: { js: string, html: string, css: string}) => void;
-  javascriptSettings: JavascriptSettings | null; // can be disabled -- so should it be null?
+  javascriptSettings: JavascriptSettings; // can be disabled -- so should it be null?
   htmlSettings: HTMLSettings;
   cssSettings: CSSSettings;
   updateLanguageSettings: (
@@ -20,6 +20,8 @@ export interface WebStudioState {
   updateEditorSettings: (settings: Partial<EditorSettings>) => void;
   projectSettings: ProjectSettings;
   updateProjectSettings: (settings: Partial<ProjectSettings>) => void;
+  workspaceSettings: WorkspaceSettings
+  updateWorkSpaceSettings: (settings: Partial<WorkspaceSettings>) => void;
   showModal: boolean;
   setShowModal: (showModal: boolean) => void
   previewUrl: string
@@ -41,7 +43,7 @@ export interface EditorSettings {
   // enableVimMode: boolean
 }
 
-export interface WebStudioSettings {
+export interface WorkspaceSettings {
   autoSave: boolean;
   // readonly: boolean;
   // colorScheme: "light" | "dark";

@@ -17,14 +17,15 @@ const TopBarContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 0.75em 1rem;
+  padding: 1rem;
   /* gap: 10px; */ // why gap
   color: ${(props) => props.theme.colors.primaryText};
   /* font-size: 0.94rem;  */
   font-size: 1rem;
   border-bottom: 1px solid ${(props) => props.theme.colors.secondaryBackground};
   flex: 0 1 auto; // isnt this the default???
-  /* background-color: ${(props) => props.theme.colors.primaryBackground}; */
-  background-color: #111;
+  background-color: ${(props) => props.theme.colors.darkerBackground};
+  /* background-color: #111; */
 `;
 
 const TopBarLogoContainer = styled.a`

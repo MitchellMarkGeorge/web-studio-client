@@ -1,7 +1,21 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import styled from "styled-components";
-import ProjectSettings from "./SettingSections/ProjectSettings";
-import StudioSettings from "./SettingSections/StudioSettings";
+import ProjectSettings from "./components/SettingSections/ProjectSettings";
+import StudioSettings from "./components/SettingSections/StudioSettings";
+import { SettingsModalProvider } from "../../contexts/SettingsModalContext";
+import { GeneralSettingsButton } from "./components/GeneralSettingsButton";
+import { SettingsFooter } from "./components/SettingsFooter";
+import WorkspaceSettings from "./components/SettingSections/WorkspaceSettings";
+import EditorSettings from "./components/SettingSections/EditorSettings";
+import JavascriptSettings from "./components/SettingSections/JavascriptSettings";
+import HTMLSettings from "./components/SettingSections/HTMLSettings";
+import CSSSettings from "./components/SettingSections/CSSSettings";
 
 const Background = styled.div`
   position: fixed;
@@ -15,57 +29,55 @@ const Background = styled.div`
   padding-top: 20vh;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.65);
   z-index: 2;
-  /* backdrop-filter: blur(3px); */
+  backdrop-filter: blur(3px);
 `;
 
 const ModalWrapper = styled.div`
   position: relative;
-  width: 800px;
-  /* width: 800px; */
-  height: 500px;
+  width: 37.5rem;
+  height: 37.5rem;
+  // think about this
+  /* border: 2px solid ${(props) => props.theme.colors.secondaryBackground}; */
   // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  background-color: ${(props) => props.theme.colors.primaryBackground};
+  /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
+  background-color: ${(props) => props.theme.colors.darkerBackground};
   z-index: 2;
-  border-radius: 8px;
+  border-radius: 0.5rem;
 `;
 
 const SettingsHeading = styled.h1`
-  font-size: 32px;
+  font-size: 2rem;
   font-weight: 700;
   color: ${(props) => props.theme.colors.primaryText};
 `;
 
-const SettingMenuConainter = styled.div`
+const SettingModalConainter = styled.div`
   height: 100%;
   width: 100%;
-  padding: 24px;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 0.63rem;
 `;
 
-const SettingMenuButtonContainer = styled.div`
+const SettingModalButtonContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  gap: 10px;
+  padding: 0.88rem 0;
+  gap: 0.63rem;
 `;
 
-const SettingMenuButton = styled.div<{ isSelected: boolean }>`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 8px;
-  padding: 10px;
-  font-size: 14px;
+const SettingModalButton = styled(GeneralSettingsButton)<{
+  isSelected: boolean;
+}>`
   flex: 1;
-  color: ${(props) => props.theme.colors.primaryText};
-  cursor: pointer;
+  color: ${(props) =>
+    props.isSelected
+      ? props.theme.colors.primaryText
+      : props.theme.colors.secondaryText};
   background-color: ${(props) =>
     props.isSelected
       ? props.theme.colors.primaryAccent
@@ -75,7 +87,6 @@ const SettingMenuButton = styled.div<{ isSelected: boolean }>`
 interface Props {
   showModal: boolean;
   setShowModal: (showModal: boolean) => void;
-  //   children: React.ReactNode;
 }
 
 // const sectionSettingsName = ["Studio", "Project", "Editor", "JavaScript", "HTML", "CSS"];
@@ -86,14 +97,15 @@ export default function SettingsModal({ showModal, setShowModal }: Props) {
   const [selectedMenuItem, setSelectedMenuItem] = useState(0);
 
   // will just make this into 2 arrays
-  const settingSections = {
+  const settingSections = useMemo(() => ({
     // "Studio": StudioSettings,
+    Workspace: WorkspaceSettings,
     Project: ProjectSettings,
-    Editor: StudioSettings,
-    JavaScript: StudioSettings,
-    HTML: StudioSettings,
-    CSS: StudioSettings,
-  };
+    Editor: EditorSettings,
+    JavaScript: JavascriptSettings,
+    HTML: HTMLSettings,
+    CSS: CSSSettings,
+  }), []);
 
   const onKeyPress = useCallback(
     (event: KeyboardEvent) => {
@@ -117,35 +129,33 @@ export default function SettingsModal({ showModal, setShowModal }: Props) {
 
   const SelectedSettingSection =
     Object.values(settingSections)[selectedMenuItem];
+    // need focus-trap
   return (
     <>
       {showModal ? (
-        <Background onClick={closeModal} ref={modalBackgroundRef}>
-          <ModalWrapper>
-            {/* {children} */}
-            <SettingMenuConainter>
-              <SettingsHeading>Settings</SettingsHeading>
-              <SettingMenuButtonContainer>
-                {Object.keys(settingSections).map((sectionName, index) => (
-                  <SettingMenuButton
-                    key={sectionName}
-                    onClick={() => setSelectedMenuItem(index)}
-                    isSelected={selectedMenuItem === index}
-                  >
-                    {sectionName}
-                  </SettingMenuButton>
-                ))}
-                {/* <SettingMenuButton isSelected>Studio</SettingMenuButton>
-                <SettingMenuButton isSelected={false}>Project</SettingMenuButton>
-                <SettingMenuButton isSelected={false}>Editor</SettingMenuButton>
-                <SettingMenuButton isSelected={false}>JavaScript</SettingMenuButton>
-                <SettingMenuButton isSelected={false}>HTML</SettingMenuButton>
-                <SettingMenuButton isSelected={false}>CSS</SettingMenuButton> */}
-              </SettingMenuButtonContainer>
-              {<SelectedSettingSection />}
-            </SettingMenuConainter>
-          </ModalWrapper>
-        </Background>
+        <SettingsModalProvider>
+          <Background onClick={closeModal} ref={modalBackgroundRef}>
+            <ModalWrapper>
+              {/* {children} */}
+              <SettingModalConainter>
+                <SettingsHeading>Settings</SettingsHeading>
+                <SettingModalButtonContainer>
+                  {Object.keys(settingSections).map((sectionName, index) => (
+                    <SettingModalButton
+                      key={sectionName}
+                      onClick={() => setSelectedMenuItem(index)}
+                      isSelected={selectedMenuItem === index}
+                    >
+                      {sectionName}
+                    </SettingModalButton>
+                  ))}
+                </SettingModalButtonContainer>
+                <SelectedSettingSection />
+                <SettingsFooter />
+              </SettingModalConainter>
+            </ModalWrapper>
+          </Background>
+        </SettingsModalProvider>
       ) : null}
     </>
   );

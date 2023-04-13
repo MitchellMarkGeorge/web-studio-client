@@ -63,6 +63,7 @@ export const GlobalStyle = createGlobalStyle`
     html, body, #root {
         width: 100%;
         height: 100%;
+        // makes codemirror look weird
         /* -webkit-font-smoothing: antialiased; */
         /* line-height: 1.5; */
         /* position: relative; */
@@ -78,4 +79,5 @@ export const GlobalStyle = createGlobalStyle`
         border: none;
         cursor: pointer;
     }
+
 `;

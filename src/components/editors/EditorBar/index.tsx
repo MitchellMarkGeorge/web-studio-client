@@ -16,10 +16,6 @@ const EditorBarContainer = styled.div`
   font-size: 15px;
   font-weight: 400;
   color: ${(props) => props.theme.colors.primaryText};
-  /* flex: 0 1 auto; */
-  /* background-color: #111; */
-  /* z-index: 2; */
-  /* border-bottom: 1px solid ${(props) => props.theme.colors.secondaryBackground}; */
 `;
 
 
