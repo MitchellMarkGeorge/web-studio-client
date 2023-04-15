@@ -8,7 +8,6 @@ import React, {
 import styled from "styled-components";
 import ProjectSettings from "./components/SettingSections/ProjectSettings";
 import StudioSettings from "./components/SettingSections/StudioSettings";
-import { SettingsModalProvider } from "../../contexts/SettingsModalContext";
 import { GeneralSettingsButton } from "./components/GeneralSettingsButton";
 import { SettingsFooter } from "./components/SettingsFooter";
 import WorkspaceSettings from "./components/SettingSections/WorkspaceSettings";
@@ -98,7 +97,6 @@ export default function SettingsModal({ showModal, setShowModal }: Props) {
 
   // will just make this into 2 arrays
   const settingSections = useMemo(() => ({
-    // "Studio": StudioSettings,
     Workspace: WorkspaceSettings,
     Project: ProjectSettings,
     Editor: EditorSettings,
@@ -133,7 +131,6 @@ export default function SettingsModal({ showModal, setShowModal }: Props) {
   return (
     <>
       {showModal ? (
-        <SettingsModalProvider>
           <Background onClick={closeModal} ref={modalBackgroundRef}>
             <ModalWrapper>
               {/* {children} */}
@@ -155,7 +152,6 @@ export default function SettingsModal({ showModal, setShowModal }: Props) {
               </SettingModalConainter>
             </ModalWrapper>
           </Background>
-        </SettingsModalProvider>
       ) : null}
     </>
   );

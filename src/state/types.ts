@@ -43,11 +43,14 @@ export interface EditorSettings {
   // enableVimMode: boolean
 }
 
+export type LayoutOptions =  "colunm" | "row";
+
 export interface WorkspaceSettings {
   autoSave: boolean;
   // readonly: boolean;
   // colorScheme: "light" | "dark";
-  layout: "colunm" | "row" | "tabs"
+  // layout: "colunm" | "row" | "tabs"
+  layout: LayoutOptions;
 }
 
 export interface ProjectSettings {
@@ -71,7 +74,8 @@ export interface CSSSettings {
   enableColorView: boolean;
 }
 
-export const enum JavascriptPreset {
+
+export enum JavascriptPreset {
   TYPESCRIPT = "TypeScript",
   COFFEESCRIPT = "CoffeeScript",
   ES6 = "ES6",
@@ -81,15 +85,22 @@ export const enum JavascriptPreset {
   // DEFAULT = ES6
 }
 
-export const enum CSSPreset {
+// use const enums??
+export const javascriptPresets = Object.values(JavascriptPreset);
+
+export enum CSSPreset {
   DEFAULT = "CSS",
   SCSS = "SCSS",
   SASS = "SASS",
   LESS = "Less"
 }
 
-export const enum HTMLPreset {
+export const cssPresets = Object.values(CSSPreset);
+
+export enum HTMLPreset {
   DEFAULT = "HTML",
   // PUG = "Pug",
   // TODO: think of other html presets
 }
+
+export const htmlPresets = Object.values(HTMLPreset);

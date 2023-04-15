@@ -6,11 +6,11 @@ import Editor from "../Editor";
 import { html } from "@codemirror/lang-html";
 import { useWebStudioState } from "../../../state";
 import debounce from "lodash.debounce";
-import { useWorkspaceContext } from "../../../contexts/WorkspaceContext";
+import { useWorkspaceState } from "../../../state/WorkspaceState";
 
 export default function HTMLEditor() {
   // const updateCode = useWebStudioState((state) => state.updateCode);
-  const { saveHTML } = useWorkspaceContext();
+  const saveHTML = useWorkspaceState(state => state.saveHTML);
 
   const onHtmlChanged = (code: string) => {
     saveHTML(code);

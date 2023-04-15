@@ -9,7 +9,7 @@ export const createEditorSettingsSlice: StateCreator<
 > = (set, get) => ({
   editorSettings: {
     autocompletionEnabled: true,
-    bracketMatchingEnabled: false,
+    bracketMatchingEnabled: true,
     closeBracketsEnabled: true,
     lintingEnabled: true,
     enableReletiveLineNumbers: false,

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { GeneralSettingsButton } from "./GeneralSettingsButton";
+import { useSettingModalState } from "../../../state/SettingsModalState";
 
 const SettingsFooterContainer = styled.div`
   width: 100%;
@@ -48,12 +49,13 @@ interface Props {
 }
 
 export const SettingsFooter = (props: Props) => {
+  const saveSettings = useSettingModalState(state => state.saveSettings);
   return (
     <SettingsFooterContainer>
       <SettingsResetText>Reset to Defaults</SettingsResetText>
       <SettingsFooterButtonContianer>
         <SettingsCancelButton onClick={props.closeModal}>Cancel</SettingsCancelButton>
-        <SettingsSaveButton>Save Settings</SettingsSaveButton>
+        <SettingsSaveButton onClick={saveSettings}>Save Settings</SettingsSaveButton>
       </SettingsFooterButtonContianer>
     </SettingsFooterContainer>
   );

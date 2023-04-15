@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 interface Props {
-  isChecked?: boolean;
+  isChecked: boolean;
   // setIsChecked: () => void;
-  onClick?: () => void;
+  onClick: () => void;
 }
 
 const CheckboxInput = styled.input`
@@ -38,8 +38,8 @@ export default function SettingCheckbox(props: Props) {
   return (
     <CheckboxInput
       type="checkbox"
-      //   checked={props.isChecked}
-      //   onClick={props.onClick}
+        checked={props.isChecked}
+        onChange={props.onClick}
     />
   );
 }

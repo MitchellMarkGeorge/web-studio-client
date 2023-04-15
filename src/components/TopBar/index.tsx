@@ -8,7 +8,7 @@ import { FaPlay } from "@react-icons/all-files/fa/FaPlay";
 import { AiFillSetting } from "@react-icons/all-files/ai/AiFillSetting";
 // import { HiPlay } from "@react-icons/all-files/hi/HiPlay";
 import { HiPlay } from "react-icons/hi2";
-import { useWorkspaceContext } from "../../contexts/WorkspaceContext";
+import { useWorkspaceState } from "../../state/WorkspaceState";
 import { buildPreviewUrl } from "../../services/preview";
 
 const TopBarContainer = styled.div`
@@ -81,7 +81,7 @@ const TopBarButton = styled.button`
 
 export default function TopBar() {
   // problem with this is that the top bar re renders whenever the code changes
-  const { runCode } = useWorkspaceContext();
+  const runCode = useWorkspaceState(state => state.runCode);
 
   const { projectName } = useWebStudioState((state) => state.projectSettings);
   // const updateCode = useWebStudioState(state => state.updateCode);

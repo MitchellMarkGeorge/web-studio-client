@@ -5,10 +5,10 @@ import { SiJavascript } from "@react-icons/all-files/si/SiJavascript";
 import Editor from "../Editor";
 import { javascript } from "@codemirror/lang-javascript";
 import debounce from "lodash.debounce";
-import { useWorkspaceContext } from "../../../contexts/WorkspaceContext";
+import { useWorkspaceState } from "../../../state/WorkspaceState";
 
 export default function JavascriptEditor() {
-  const { saveJs } = useWorkspaceContext();
+  const saveJs = useWorkspaceState(state => state.saveJs);
 
   // should wrap in both useCallback and debounce
   const onJavascriptChange = (code: string) => {

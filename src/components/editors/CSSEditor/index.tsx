@@ -6,10 +6,10 @@ import Editor from "../Editor";
 import { css } from "@codemirror/lang-css";
 import { useWebStudioState } from "../../../state";
 import debounce from "lodash.debounce";
-import { useWorkspaceContext } from "../../../contexts/WorkspaceContext";
+import { useWorkspaceState } from "../../../state/WorkspaceState";
 
 export default function CSSEditor() {
-  const { saveCSS } = useWorkspaceContext();
+  const saveCSS = useWorkspaceState(state => state.saveCSS);
   // should I be trimming the code???
   const onCssChanged = (code: string) => {
     saveCSS(code);

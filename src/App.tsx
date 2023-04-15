@@ -4,9 +4,7 @@ import { darkTheme } from "./style/theme";
 import TopBar from "./components/TopBar";
 import WebStudioWorkspace from "./components/WebStudioWorkspace";
 import { useWebStudioState } from "./state";
-import { useState } from "react";
 import SettingsModal from "./components/SettingsModal";
-import { WorkspaceContextProvider } from "./contexts/WorkspaceContext";
 
 const WebStudioContainer = styled.div`
   height: 100%;
@@ -26,10 +24,8 @@ function App() {
       <GlobalStyle />
       <SettingsModal showModal={showModal} setShowModal={setShowModal} />
       <WebStudioContainer>
-        <WorkspaceContextProvider>
-          <TopBar />
-          <WebStudioWorkspace isJsEnabled={projectSettings.enableJs} />
-        </WorkspaceContextProvider>
+        <TopBar />
+        <WebStudioWorkspace isJsEnabled={projectSettings.enableJs} />
       </WebStudioContainer>
     </ThemeProvider>
   );

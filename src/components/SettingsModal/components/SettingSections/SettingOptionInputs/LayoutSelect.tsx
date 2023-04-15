@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { RiLayout4Fill } from "react-icons/ri";
 import { RiTableFill } from "react-icons/ri";
+import { LayoutOptions } from "../../../../../state/types";
 
 const LayoutSelectContainer = styled.div`
   display: flex;
@@ -24,19 +25,23 @@ const LayoutOption = styled.button<{ isSelected: boolean }>`
 `;
 
 interface Props {
-  selectedLayout: string;
-  updateLayoutOption: (layout: string) => void;
+  selectedLayout: LayoutOptions;
+  setLayoutOption: (layout: LayoutOptions) => void;
 }
 
-export default function LayoutSelect() {
-    // state will be provided from props
-  const [layoutOption, setLayoutOption] = useState<"column" | "row">("column");
+export default function LayoutSelect(props: Props) {
   return (
     <LayoutSelectContainer>
-      <LayoutOption isSelected={layoutOption === "column"} onClick={() => setLayoutOption("column")}>
+      <LayoutOption
+        isSelected={props.selectedLayout === "colunm"}
+        onClick={() => props.setLayoutOption("colunm")}
+      >
         <RiLayout4Fill />
       </LayoutOption>
-      <LayoutOption isSelected={layoutOption === "row"} onClick={() => setLayoutOption("row")}>
+      <LayoutOption
+        isSelected={props.selectedLayout === "row"}
+        onClick={() => props.setLayoutOption("row")}
+      >
         <RiTableFill />
       </LayoutOption>
     </LayoutSelectContainer>
