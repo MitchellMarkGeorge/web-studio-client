@@ -9,6 +9,8 @@ import {
 } from "../state/types";
 import { useWebStudioState } from "../state";
 
+// switch to zustand store
+
 interface SettingsModalContextType {
   projectSettings: ProjectSettings;
   workspaceSettings: WorkspaceSettings;

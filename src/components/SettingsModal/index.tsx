@@ -151,7 +151,7 @@ export default function SettingsModal({ showModal, setShowModal }: Props) {
                   ))}
                 </SettingModalButtonContainer>
                 <SelectedSettingSection />
-                <SettingsFooter />
+                <SettingsFooter closeModal={() => setShowModal(false)}/>
               </SettingModalConainter>
             </ModalWrapper>
           </Background>

@@ -2,6 +2,7 @@ import React from "react";
 import { SettingSectionContainer } from "./utils";
 import { SettingsOption } from "../SettingsOption";
 import SettingCheckbox from "./SettingOptionInputs/Checkbox";
+import LayoutSelect from "./SettingOptionInputs/LayoutSelect";
 
 export default function WorkspaceSettings() {
   return (
@@ -19,7 +20,7 @@ export default function WorkspaceSettings() {
       <SettingsOption
         settingName="Workspace Layout"
         settingDescription="Change the layout of your workspace."
-        inputElement={<SettingCheckbox />}
+        inputElement={<LayoutSelect />}
       />
     </SettingSectionContainer>
   );

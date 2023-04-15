@@ -17,10 +17,6 @@ interface Props {
 
 export default function WebStudioWorkspace(props: Props) {
   // the idea behind this is to get the intancces of the codemirror editor object for each editor
-
-  const htmlEditorInstance = useRef();
-  const cssEditorInstance = useRef();
-  const jsEditorInstance = useRef();
   return (
     <WebStudioWorkspaceContainer>
       <SplitPane direction="horizontal">

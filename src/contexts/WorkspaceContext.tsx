@@ -13,6 +13,8 @@ import { buildPreviewUrl } from "../services/preview";
 
 // for now this works
 
+// will switch to using zustand 
+
 interface WorkspaceContextType {
   js: string;
   css: string;

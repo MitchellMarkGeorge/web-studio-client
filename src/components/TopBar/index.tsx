@@ -58,7 +58,7 @@ const TopBarButtonRowContainer = styled.div`
 `;
 
 const TopBarButton = styled.button`
-  display: flex;
+  display: inline-flex;
   flex-direction: row;
   align-items: center;
   /* padding: 0.625rem; */

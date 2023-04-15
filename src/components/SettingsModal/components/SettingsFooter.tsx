@@ -43,13 +43,16 @@ const SettingsCancelButton = styled(GeneralSettingsButton)`
   // figure out hover for this one
 `;
 
-export const SettingsFooter = () => {
+interface Props {
+  closeModal: () => void;
+}
+
+export const SettingsFooter = (props: Props) => {
   return (
     <SettingsFooterContainer>
-        
       <SettingsResetText>Reset to Defaults</SettingsResetText>
       <SettingsFooterButtonContianer>
-        <SettingsCancelButton>Cancel</SettingsCancelButton>
+        <SettingsCancelButton onClick={props.closeModal}>Cancel</SettingsCancelButton>
         <SettingsSaveButton>Save Settings</SettingsSaveButton>
       </SettingsFooterButtonContianer>
     </SettingsFooterContainer>

@@ -73,7 +73,7 @@ export const GlobalStyle = createGlobalStyle`
   letter-spacing: normal !important;
     }
 
-    button {
+    button, input, select {
         font: inherit;
         color: inherit;
         border: none;
