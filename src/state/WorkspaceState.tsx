@@ -33,24 +33,40 @@ export const useWorkspaceState = create<WorkspaceState>((set, get) => ({
   css: "",
   html: "",
   saveJs: (js) => {
+    const { workspaceSettings } = useWebStudioState.getState();
+    const { runCode } = get();
     set({
       js,
       isUnsaved: true,
     });
+    if (workspaceSettings.livePreview) {
+      runCode();
+    }
   },
   saveCSS: (css) => {
+    const { workspaceSettings } = useWebStudioState.getState();
+    const { runCode } = get();
     set({
       css,
       isUnsaved: true,
     });
+    if (workspaceSettings.livePreview) {
+      runCode();
+    }
   },
   saveHTML: (html) => {
+    const { workspaceSettings } = useWebStudioState.getState();
+    const { runCode } = get();
     set({
       html,
       isUnsaved: true,
     });
+    if (workspaceSettings.livePreview) {
+      runCode();
+    }
   },
   runCode: () => {
+    console.log("running the code");
     const { setPreviewUrl } = useWebStudioState.getState()
     const { js, css, html } = get();
     const newPreviewUrl = buildPreviewUrl(js, css, html);

@@ -30,8 +30,24 @@ export default function EditorSettings() {
     });
   };
 
+  const toggleAutocomplete = () => {
+    updateTempEditorSettings({
+      autocompletionEnabled: !tempEditorSettings.autocompletionEnabled,
+    });
+  };
+
   return (
     <SettingSectionContainer>
+      <SettingsOption
+        settingName="Enable Autocompletion"
+        settingDescription="Allow the editor to autocomplete your code as you type."
+        inputElement={
+          <SettingCheckbox
+            isChecked={tempEditorSettings.autocompletionEnabled}
+            onClick={toggleAutocomplete}
+          />
+        }
+      />
       <SettingsOption
         settingName="Enable Line Numbers"
         settingDescription="Show line numbers in your editors."

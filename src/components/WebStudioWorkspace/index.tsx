@@ -16,11 +16,12 @@ interface Props {
 }
 
 export default function WebStudioWorkspace(props: Props) {
-  // the idea behind this is to get the intancces of the codemirror editor object for each editor
+  const workspaceSettiong = useWebStudioState(state => state.workspaceSettings);
+  const isColunmLayout = workspaceSettiong.layout === "colunm";
   return (
     <WebStudioWorkspaceContainer>
-      <SplitPane direction="horizontal">
-        <SplitPane direction="vertical">
+      <SplitPane direction={ isColunmLayout ? "horizontal" : "vertical"}>
+        <SplitPane direction={ isColunmLayout ? "vertical" : "horizontal"}>
           <HTMLEditor/>
           <CSSEditor/>
           {props.isJsEnabled && <JavascriptEditor/>}

@@ -20,14 +20,25 @@ export default function WorkspaceSettings() {
   const setLayoutOption = (layout: LayoutOptions) => {
     updateTempWorkspaceSettings({ layout });
   };
+
+  const toggleLivePreview = () => {
+    updateTempWorkspaceSettings({
+      livePreview: !tempWorkspaceSettings.livePreview,
+    });
+  };
   return (
     <SettingSectionContainer>
-      {/* <SettingsOption
+      <SettingsOption
         settingName="Live Preview"
         settingDescription="Automatically run your code as you type in the editor."
-        inputElement={<SettingCheckbox/>}
-      /> */}
-      <SettingsOption
+        inputElement={
+          <SettingCheckbox
+            isChecked={tempWorkspaceSettings.livePreview}
+            onClick={toggleLivePreview}
+          />
+        }
+      />
+      {/* <SettingsOption
         settingName="Auto Save"
         settingDescription="Automatically save your code as you type in the editor."
         inputElement={
@@ -36,7 +47,7 @@ export default function WorkspaceSettings() {
             onClick={toggleAutoSave}
           />
         }
-      />
+      /> */}
       <SettingsOption
         settingName="Workspace Layout"
         settingDescription="Change the layout of your workspace."

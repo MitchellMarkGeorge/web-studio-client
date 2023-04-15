@@ -42,8 +42,8 @@ const Divider = styled.div<DirectionProps & { isEnabled: boolean }>`
         :hover {
           /* border-left: 5px solid ${(props) => props.theme.colors.primaryAccent};
           border-right: 5px solid ${(props) => props.theme.colors.primaryAccent}; */
-          border-left: 5px solid rgba(17, 17, 17, 0.5);
-          border-right: 5px solid rgba(17, 17, 17, 0.5);
+          border-left: 5px solid rgba(0, 0, 0, 0.5);
+          border-right: 5px solid rgba(0, 0, 0, 0.5);
           /* opacity: 0.5; */
         }
         ${props.isEnabled && "cursor: col-resize;"}/* cursor: col-resize; */
@@ -61,8 +61,8 @@ const Divider = styled.div<DirectionProps & { isEnabled: boolean }>`
           // think about the color
           /* border-top: 5px solid ${(props) => props.theme.colors.primaryAccent};
           border-bottom: 5px solid ${(props) => props.theme.colors.primaryAccent}; */
-          border-top: 5px solid rgba(17, 17, 17, 0.5);
-          border-bottom: 5px solid rgba(17, 17, 17, 0.5);
+          border-top: 5px solid rgba(0, 0, 0, 0.5);
+          border-bottom: 5px solid rgba(0, 0, 0, 0.5);
           /* opacity: 0.3; */
         }
         ${props.isEnabled && "cursor: row-resize;"}/* cursor: row-resize; */

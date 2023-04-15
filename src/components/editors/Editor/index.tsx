@@ -1,3 +1,5 @@
+import CodeMirror from "@uiw/react-codemirror";
+
 import {
   defaultKeymap,
   history,
@@ -16,7 +18,7 @@ import {
   foldKeymap,
   bracketMatching,
 } from "@codemirror/language";
-import { Compartment, Extension } from "@codemirror/state";
+import { Extension } from "@codemirror/state";
 import {
   drawSelection,
   dropCursor,
@@ -25,7 +27,6 @@ import {
   keymap,
   lineNumbers,
 } from "@codemirror/view";
-// import { basicSetup, EditorView } from "codemirror";
 import { useEffect, useMemo, useRef } from "react";
 import styled from "styled-components";
 import { useWebStudioState } from "../../../state";
@@ -50,91 +51,109 @@ const CodeMirrorWrapper = styled.div`
 
 export default function Editor(props: Props) {
   const editorSettings = useWebStudioState((state) => state.editorSettings);
-  const { lineNumbersEnabled } = editorSettings;
 
-  const container = useRef<HTMLDivElement | null>(null);
-  const editorView = useRef<EditorView | null>(null);
+  // const container = useRef<HTMLDivElement | null>(null);
+  // const editorView = useRef<EditorView | null>(null);
 
-  const languageCompartment = useRef(new Compartment());
-  const lineNumberCompartment = useRef(new Compartment());
-  // should the editor be at 100%??
-  // this technically is not nesseccary as the editor background and the layout background will be same color
+  // const languageCompartment = useRef(new Compartment());
+  // const lineNumberCompartment = useRef(new Compartment());
+  // // should the editor be at 100%??
+  // // this technically is not nesseccary as the editor background and the layout background will be same color
 
-  const codeChangeListener = useMemo(
-    () =>
-      EditorView.updateListener.of((update) => {
-        if (update.docChanged) {
-          const { doc } = update.state;
-          // console.log(doc.toString());
-          props.onCodeChange(doc.toString());
-          // props.onCodeChange(doc.toString())
-        }
-      }),
-    [props.onCodeChange]
-  );
+  // const codeChangeListener = useMemo(
+  //   () =>
+  //     EditorView.updateListener.of((update) => {
+  //       if (update.docChanged) {
+  //         const { doc } = update.state;
+  //         // console.log(doc.toString());
+  //         props.onCodeChange(doc.toString());
+  //         // props.onCodeChange(doc.toString())
+  //       }
+  //     }),
+  //   [props.onCodeChange]
+  // );
 
-  useEffect(() => {
-    if (container.current && !editorView.current) {
-      editorView.current = new EditorView({
-        // extensions: [basicSetup, darktheme],
-        // need to migrrate to @codemirror/view and configure things myself
-        extensions: [
-          // need default extensions / config
-          lineNumberCompartment.current.of(
-            lineNumbersEnabled ? lineNumbers() : []
-          ),
-          // lineNumbers(),
-          syntaxHighlighting(defaultHighlightStyle, { fallback: true }),
-          darktheme,
-          highlightSpecialChars(),
-          history(),
-          languageCompartment.current.of(props.language),
-          highlightSpecialChars(),
-          history(),
-          foldGutter(),
-          drawSelection(),
-          dropCursor(),
-          indentOnInput(),
-          closeBrackets(),
-          codeChangeListener,
-          // bracketMatching(),
-
-          keymap.of([
-            indentWithTab,
-            ...closeBracketsKeymap,
-            ...defaultKeymap,
-            ...historyKeymap,
-            ...foldKeymap,
-          ]),
-        ],
-        parent: container.current,
-      });
-    }
-
-    // still need to destroy the editor on component unmount
-    // return () => editorView.current?.destroy();
-  }, []);
-
-  // should only be called on compeonent unmount
   // useEffect(() => {
-  //   return () => editorView.current?.destroy();
-  // }, [])
+  //   if (container.current && !editorView.current) {
+  //     editorView.current = new EditorView({
+  //       // extensions: [basicSetup, darktheme],
+  //       // need to migrrate to @codemirror/view and configure things myself
+  //       extensions: [
+  //         // need default extensions / config
+  //         lineNumberCompartment.current.of(
+  //           lineNumbersEnabled ? lineNumbers() : []
+  //         ),
+  //         // lineNumbers(),
+  //         syntaxHighlighting(defaultHighlightStyle, { fallback: true }),
+  //         darktheme,
+  //         highlightSpecialChars(),
+  //         history(),
+  //         languageCompartment.current.of(props.language),
+  //         highlightSpecialChars(),
+  //         history(),
+  //         foldGutter(),
+  //         drawSelection(),
+  //         dropCursor(),
+  //         indentOnInput(),
+  //         closeBrackets(),
+  //         codeChangeListener,
+  //         // bracketMatching(),
 
-  // only call this after the inital mount
-  // useMountedEffect(() => {
-  //   // should not happen on first render
-  //   if (editorView.current) {
-  //     switchLanguage(props.language);
+  //         keymap.of([
+  //           indentWithTab,
+  //           ...closeBracketsKeymap,
+  //           ...defaultKeymap,
+  //           ...historyKeymap,
+  //           ...foldKeymap,
+  //         ]),
+  //       ],
+  //       parent: container.current,
+  //     });
   //   }
-  // }, [props.language]);
 
-  const switchLanguage = (language: Extension) => {
-    console.log("here switching language");
-    if (editorView.current) {
-      editorView.current.dispatch({
-        effects: languageCompartment.current.reconfigure(language),
-      });
-    }
-  };
-  return <CodeMirrorWrapper ref={container} />;
+  //   // still need to destroy the editor on component unmount
+  //   // return () => editorView.current?.destroy();
+  // }, []);
+
+  // // should only be called on compeonent unmount
+  // // useEffect(() => {
+  // //   return () => editorView.current?.destroy();
+  // // }, [])
+
+  // // only call this after the inital mount
+  // // useMountedEffect(() => {
+  // //   // should not happen on first render
+  // //   if (editorView.current) {
+  // //     switchLanguage(props.language);
+  // //   }
+  // // }, [props.language]);
+
+  // const switchLanguage = (language: Extension) => {
+  //   console.log("here switching language");
+  //   if (editorView.current) {
+  //     editorView.current.dispatch({
+  //       effects: languageCompartment.current.reconfigure(language),
+  //     });
+  //   }
+  // };
+  // return <CodeMirrorWrapper ref={container} />;
+  return (
+    <CodeMirrorWrapper>
+      <CodeMirror
+        theme={darktheme}
+        extensions={[props.language]}
+        height="100%"
+        width="100%"
+        onChange={props.onCodeChange}
+        basicSetup={{
+          bracketMatching: editorSettings.bracketMatchingEnabled,
+          closeBrackets: editorSettings.closeBracketsEnabled,
+          lineNumbers: editorSettings.lineNumbersEnabled,
+          autocompletion: editorSettings.autocompletionEnabled,
+          highlightActiveLine: false,
+          highlightActiveLineGutter: false,
+        }}
+      />
+    </CodeMirrorWrapper>
+  );
 }

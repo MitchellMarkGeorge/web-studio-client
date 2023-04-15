@@ -80,4 +80,14 @@ export const GlobalStyle = createGlobalStyle`
         cursor: pointer;
     }
 
+    // Codemirror specific styles
+
+    .cm-editor.cm-theme {
+        height: 100%;
+        width: 100%;
+    }
+    .cm-editor.cm-focused {
+        outline: none;
+    }
+
 `;

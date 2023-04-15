@@ -9,8 +9,6 @@ import {
 import { useWebStudioState } from ".";
 import { create } from "zustand";
 
-
-
 // this setting modal state is meant to resemple a tempoaty state of settings that can be commited to the overall state once the user is done updating the state
 interface SettingsModalState {
   tempProjectSettings: ProjectSettings;
@@ -25,8 +23,10 @@ interface SettingsModalState {
   updateTempJavascriptSettings: (settings: Partial<JavascriptSettings>) => void;
   updateTempCSSSettings: (settings: Partial<CSSSettings>) => void;
   updateTempHTMLSettings: (settings: Partial<HTMLSettings>) => void;
+  syncToStoreSettings: () => void;
   restoreDefaultSettings: () => void;
   saveSettings: () => void;
+  isUnsaved: boolean
 }
 
 export const useSettingModalState = create<SettingsModalState>((set, get) => ({
@@ -38,27 +38,27 @@ export const useSettingModalState = create<SettingsModalState>((set, get) => ({
   tempHtmlSettings: useWebStudioState.getState().htmlSettings,
   updateTempProjectSettings: (settings) => {
     const { tempProjectSettings } = get();
-    set({ tempProjectSettings: { ...tempProjectSettings, ...settings } });
+    set({ tempProjectSettings: { ...tempProjectSettings, ...settings, }, isUnsaved: true });
   },
   updateTempWorkspaceSettings: (settings) => {
     const { tempWorkspaceSettings } = get();
-    set({ tempWorkspaceSettings: { ...tempWorkspaceSettings, ...settings } });
+    set({ tempWorkspaceSettings: { ...tempWorkspaceSettings, ...settings }, isUnsaved: true });
   },
   updateTempEditorSettings: (settings) => {
     const { tempEditorSettings } = get();
-    set({ tempEditorSettings: { ...tempEditorSettings, ...settings } });
+    set({ tempEditorSettings: { ...tempEditorSettings, ...settings }, isUnsaved: true });
   },
   updateTempJavascriptSettings: (settings) => {
     const { tempJavascriptSettings } = get();
-    set({ tempJavascriptSettings: { ...tempJavascriptSettings, ...settings } });
+    set({ tempJavascriptSettings: { ...tempJavascriptSettings, ...settings }, isUnsaved: true });
   },
   updateTempCSSSettings: (settings) => {
     const { tempCssSettings } = get();
-    set({ tempCssSettings: { ...tempCssSettings, ...settings } });
+    set({ tempCssSettings: { ...tempCssSettings, ...settings }, isUnsaved: true });
   },
   updateTempHTMLSettings: (settings) => {
     const { tempHtmlSettings } = get();
-    set({ tempHtmlSettings: { ...tempHtmlSettings, ...settings } });
+    set({ tempHtmlSettings: { ...tempHtmlSettings, ...settings }, isUnsaved: true });
   },
   restoreDefaultSettings: () => {
     // set both temp state and overall state to defaults
@@ -80,5 +80,17 @@ export const useSettingModalState = create<SettingsModalState>((set, get) => ({
       cssSettings: tempCssSettings,
       htmlSettings: tempHtmlSettings,
     });
+    set({ isUnsaved: false });
   },
+  syncToStoreSettings: () => {
+    set({
+      tempEditorSettings: useWebStudioState.getState().editorSettings,
+      tempWorkspaceSettings: useWebStudioState.getState().workspaceSettings,
+      tempProjectSettings: useWebStudioState.getState().projectSettings,
+      tempJavascriptSettings: useWebStudioState.getState().javascriptSettings,
+      tempCssSettings: useWebStudioState.getState().cssSettings,
+      tempHtmlSettings: useWebStudioState.getState().htmlSettings,
+    });
+  },
+  isUnsaved: false,
 }));

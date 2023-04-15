@@ -9,6 +9,7 @@ export const createWorkspaceSettingsSlice: StateCreator<
 > = (set, get) => ({
     workspaceSettings: {
         autoSave: false,
+        livePreview: false,
         layout: "colunm"
     },
     updateWorkSpaceSettings: (settings) => {

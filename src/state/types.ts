@@ -47,6 +47,7 @@ export type LayoutOptions =  "colunm" | "row";
 
 export interface WorkspaceSettings {
   autoSave: boolean;
+  livePreview: boolean;
   // readonly: boolean;
   // colorScheme: "light" | "dark";
   // layout: "colunm" | "row" | "tabs"

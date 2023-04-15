@@ -11,13 +11,14 @@ const SettingsFooterContainer = styled.div`
 `;
 
 // TODO think about this
-const SettingsResetText = styled.div`
-  text-decoration: underline;
-  color: ${(props) => props.theme.colors.primaryText};
-  font-weight: 510;
+const SavedStatusText = styled.div`
+  /* text-decoration: underline; */
+  color: ${(props) => props.theme.colors.secondaryText};
+  /* font-weight: 510; */
   /* font-size: 0.75rem; */
-  font-size: 0.875rem;
-  cursor: pointer;
+  /* font-size: 0.875rem; */
+  font-size: 0.75rem;
+  /* cursor: pointer; */
 `;
 
 const SettingsFooterButtonContianer = styled.div`
@@ -50,9 +51,10 @@ interface Props {
 
 export const SettingsFooter = (props: Props) => {
   const saveSettings = useSettingModalState(state => state.saveSettings);
+  const isUnsaved = useSettingModalState(state => state.isUnsaved);
   return (
     <SettingsFooterContainer>
-      <SettingsResetText>Reset to Defaults</SettingsResetText>
+      <SavedStatusText>{isUnsaved ? "Unsaved Changes" : "All Saved Changes"}</SavedStatusText>
       <SettingsFooterButtonContianer>
         <SettingsCancelButton onClick={props.closeModal}>Cancel</SettingsCancelButton>
         <SettingsSaveButton onClick={saveSettings}>Save Settings</SettingsSaveButton>

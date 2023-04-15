@@ -11,7 +11,7 @@ const WebStudioContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  background-color: ${(props) => props.theme.colors.primaryBackground};
+  background-color: ${(props) => props.theme.colors.darkerBackground};
 `;
 
 function App() {

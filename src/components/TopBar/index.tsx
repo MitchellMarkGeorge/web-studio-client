@@ -81,11 +81,14 @@ const TopBarButton = styled.button`
 
 export default function TopBar() {
   // problem with this is that the top bar re renders whenever the code changes
-  const runCode = useWorkspaceState(state => state.runCode);
+  const runCode = useWorkspaceState((state) => state.runCode);
 
   const { projectName } = useWebStudioState((state) => state.projectSettings);
   // const updateCode = useWebStudioState(state => state.updateCode);
   const setShowModal = useWebStudioState((state) => state.setShowModal);
+  const workspaceSettings = useWebStudioState(
+    (state) => state.workspaceSettings
+  );
   // const setPreviewUrl = useWebStudioState(state => state.setPreviewUrl)
   console.log("re-rendering");
 
@@ -98,10 +101,12 @@ export default function TopBar() {
       </TopBarLogoContainer>
       <div>{projectName || "Untitled"}</div>
       <TopBarButtonRowContainer>
-        <TopBarButton onClick={runCode}>
-          <HiPlay size={"1rem"} />
-          <span>Run</span>
-        </TopBarButton>
+        {!workspaceSettings.livePreview && (
+          <TopBarButton onClick={runCode}>
+            <HiPlay size={"1rem"} />
+            <span>Run</span>
+          </TopBarButton>
+        )}
         <TopBarButton onClick={() => setShowModal(true)}>
           <AiFillSetting size={"1rem"} />
           <span>Settings</span>

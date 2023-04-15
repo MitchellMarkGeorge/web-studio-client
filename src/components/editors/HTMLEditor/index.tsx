@@ -7,19 +7,25 @@ import { html } from "@codemirror/lang-html";
 import { useWebStudioState } from "../../../state";
 import debounce from "lodash.debounce";
 import { useWorkspaceState } from "../../../state/WorkspaceState";
+import { HTMLPreset } from "../../../state/types";
 
 export default function HTMLEditor() {
   // const updateCode = useWebStudioState((state) => state.updateCode);
   const saveHTML = useWorkspaceState(state => state.saveHTML);
+  const htmlSettings = useWebStudioState(state => state.htmlSettings);
 
   const onHtmlChanged = (code: string) => {
+    console.log(code);
     saveHTML(code);
   };
+
+
+  const preset = htmlSettings.preset !== HTMLPreset.DEFAULT ? htmlSettings.preset : undefined;
 
   return (
     <EditorContainer>
       {/* <EditorBar icon={SiHtml5} editorName="HTML" iconColor="#df7743" /> */}
-      <EditorBar icon={SiHtml5} editorName="HTML"/>
+      <EditorBar icon={SiHtml5} editorName="HTML" preset={preset}/>
       <CodeMirrorContainer>
         <Editor language={html()} onCodeChange={debounce(onHtmlChanged, 500)} />
       </CodeMirrorContainer>

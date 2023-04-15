@@ -47,12 +47,23 @@ const mainTheme = EditorView.theme(
       fontSize: "14px",
       fontFamily:
         '"Fira Code", Menlo, Monaco, Consolas, "Andale Mono", "Ubuntu Mono", "Courier New", monospace',
-      backgroundColor: "#161718",
+      // backgroundColor: "#161718",
+      backgroundColor: "#111",
       // backgroundColor: "#242628",
       color: foreground,
       fontWeight: 300,
       lineHeight: "150%",
       padding: "10px",
+      outline: "none",
+    },
+
+    ".cm-editor.cm-theme": {
+      height: "100%",
+      width: "100%",
+    },
+
+    ".cm-edior.cm-focused": {
+      outline: "none"
     },
 
     ".cm-content": {
@@ -99,7 +110,9 @@ const mainTheme = EditorView.theme(
     },
 
     ".cm-gutters": {
-      backgroundColor: "#161718",
+      // backgroundColor: "#161718",
+
+      backgroundColor: "#111",
       // backgroundColor: "#242628",
       color: "#858585",
       border: "none",

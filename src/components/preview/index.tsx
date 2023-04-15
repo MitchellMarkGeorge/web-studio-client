@@ -1,8 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
 import { useWebStudioState } from "../../state";
-import logo from "../../assets/logo.svg";
-import dedent from "ts-dedent";
 
 const PreviewFrame = styled.iframe<{ isPaneDragging: boolean }>`
   flex: 1;
@@ -15,23 +13,6 @@ const PreviewFrame = styled.iframe<{ isPaneDragging: boolean }>`
   /* pointer-events: none; */
 `;
 
-const PreviewPlaceholderContainter = styled.div`
-  flex: 1;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  color: ${(props) => props.theme.colors.primaryText};
-`;
-
-const PreviewPlaceholderLogo = styled.img`
-  height: 15%;
-  width: 15%;
-`;
 
 export default function Preview() {
   const previewUrl = useWebStudioState(state => state.previewUrl);

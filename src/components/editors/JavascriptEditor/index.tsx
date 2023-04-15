@@ -6,9 +6,11 @@ import Editor from "../Editor";
 import { javascript } from "@codemirror/lang-javascript";
 import debounce from "lodash.debounce";
 import { useWorkspaceState } from "../../../state/WorkspaceState";
+import { useWebStudioState } from "../../../state";
 
 export default function JavascriptEditor() {
   const saveJs = useWorkspaceState(state => state.saveJs);
+  const javascriptSettings = useWebStudioState(state => state.javascriptSettings);
 
   // should wrap in both useCallback and debounce
   const onJavascriptChange = (code: string) => {
@@ -18,7 +20,7 @@ export default function JavascriptEditor() {
   return (
     <EditorContainer>
       {/* <EditorBar icon={SiJavascript} editorName="Javascript" iconColor="yellow" /> */}
-      <EditorBar icon={SiJavascript} editorName="Javascript" />
+      <EditorBar icon={SiJavascript} editorName="Javascript" preset={javascriptSettings.preset} />
       <CodeMirrorContainer>
         <Editor
           language={javascript({ jsx: true })}

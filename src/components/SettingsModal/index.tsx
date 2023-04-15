@@ -15,6 +15,7 @@ import EditorSettings from "./components/SettingSections/EditorSettings";
 import JavascriptSettings from "./components/SettingSections/JavascriptSettings";
 import HTMLSettings from "./components/SettingSections/HTMLSettings";
 import CSSSettings from "./components/SettingSections/CSSSettings";
+import { useSettingModalState } from "../../state/SettingsModalState";
 
 const Background = styled.div`
   position: fixed;
@@ -94,6 +95,17 @@ interface Props {
 export default function SettingsModal({ showModal, setShowModal }: Props) {
   const modalBackgroundRef = useRef<HTMLDivElement | null>(null);
   const [selectedMenuItem, setSelectedMenuItem] = useState(0);
+  const syncToStoreSettings = useSettingModalState(state => state.syncToStoreSettings);
+
+  useEffect(() => {
+    // this makes sure that the setting modal state is always in sync with the top level state
+    // and is synced back is there are any unsaved changes
+    syncToStoreSettings();
+    return () => {
+      setSelectedMenuItem(0);
+      syncToStoreSettings();
+    }
+  }, [showModal]);
 
   // will just make this into 2 arrays
   const settingSections = useMemo(() => ({
@@ -105,9 +117,12 @@ export default function SettingsModal({ showModal, setShowModal }: Props) {
     CSS: CSSSettings,
   }), []);
 
+
   const onKeyPress = useCallback(
     (event: KeyboardEvent) => {
       if (showModal && event.key === "Escape") {
+        // in case of any un
+        syncToStoreSettings();
         setShowModal(false);
       }
     },
