@@ -33,7 +33,8 @@ const EditorNameContainer = styled.div`
 const PresetText = styled.div`
   font-size: 0.875rem;
   color: ${(props) => props.theme.colors.secondaryText};
-  opacity: 0.5;
+  /* opacity: 0.5; */
+  text-transform: uppercase;
 `
 
 interface Props {

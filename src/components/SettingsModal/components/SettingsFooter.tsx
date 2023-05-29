@@ -52,6 +52,7 @@ interface Props {
 export const SettingsFooter = (props: Props) => {
   const saveSettings = useSettingModalState(state => state.saveSettings);
   const isUnsaved = useSettingModalState(state => state.isUnsaved);
+  // const setShowModal = use
   return (
     <SettingsFooterContainer>
       <SavedStatusText>{isUnsaved ? "Unsaved Changes" : "All Saved Changes"}</SavedStatusText>

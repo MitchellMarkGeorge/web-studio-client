@@ -1,5 +1,5 @@
 import { IconContext } from "@react-icons/all-files";
-import React from "react";
+import React, { useState } from "react";
 import styled, { useTheme } from "styled-components";
 
 import logo from "../../assets/logo.svg";
@@ -89,8 +89,16 @@ export default function TopBar() {
   const workspaceSettings = useWebStudioState(
     (state) => state.workspaceSettings
   );
+  const [isCodeBuilding, setIsCodeBuilding] = useState(false);
   // const setPreviewUrl = useWebStudioState(state => state.setPreviewUrl)
   console.log("re-rendering");
+
+  const onRunClicked = () => {
+    setIsCodeBuilding(true);
+    runCode().then(() => {
+      setIsCodeBuilding(false);
+    })
+  }
 
   // const project
   return (
@@ -102,9 +110,9 @@ export default function TopBar() {
       <div>{projectName || "Untitled"}</div>
       <TopBarButtonRowContainer>
         {!workspaceSettings.livePreview && (
-          <TopBarButton onClick={runCode}>
+          <TopBarButton onClick={onRunClicked} disabled={isCodeBuilding}>
             <HiPlay size={"1rem"} />
-            <span>Run</span>
+            <span>{isCodeBuilding ? "Building..." : "Run"}</span>
           </TopBarButton>
         )}
         <TopBarButton onClick={() => setShowModal(true)}>

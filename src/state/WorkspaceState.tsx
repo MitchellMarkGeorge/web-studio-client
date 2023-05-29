@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { useWebStudioState } from ".";
 import { buildPreviewUrl } from "../services/preview";
 import { create } from "zustand";
+import apiClient from "../services/apiClient";
 
 // this context is meant to act as a primary place where the code is saved to first
 // once the user presses the run code button, the code is then saved to the overall state
@@ -21,17 +22,19 @@ interface WorkspaceState {
   css: string;
   html: string;
   isUnsaved: boolean;
+  isRunningCode: boolean
   updateIsUnsaved: (isUnsaved: boolean) => void;
   saveJs: (js: string) => void;
   saveCSS: (css: string) => void;
   saveHTML: (html: string) => void;
-  runCode: () => void;
+  runCode: () => Promise<void>;
 }
 
 export const useWorkspaceState = create<WorkspaceState>((set, get) => ({
   js: "",
   css: "",
   html: "",
+  isRunningCode: false,
   saveJs: (js) => {
     const { workspaceSettings } = useWebStudioState.getState();
     const { runCode } = get();
@@ -65,12 +68,14 @@ export const useWorkspaceState = create<WorkspaceState>((set, get) => ({
       runCode();
     }
   },
-  runCode: () => {
+  runCode: async () => {
     console.log("running the code");
-    const { setPreviewUrl } = useWebStudioState.getState()
+    // const { setPreviewUrl } = useWebStudioState.getState()
     const { js, css, html } = get();
-    const newPreviewUrl = buildPreviewUrl(js, css, html);
-    setPreviewUrl(newPreviewUrl);
+    const { projectId } = useWebStudioState.getState();
+    await apiClient.updateCode(projectId!, js, css, html);
+    // const newPreviewUrl = buildPreviewUrl(js, css, html);
+    // setPreviewUrl(newPreviewUrl);
   },
   isUnsaved: false,
   updateIsUnsaved: (isUnsaved) => {

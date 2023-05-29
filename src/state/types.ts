@@ -1,7 +1,10 @@
+import { ProjectResponse } from "../services/apiClient";
+
 export interface WebStudioState {
   // hack to style the iframe while the split pane is being dragged
   isPaneDragging: boolean;
   setIsPaneDragging: (isPaneDragging: boolean) => void;
+  projectId?: number
   // javascriptCode: string;
   // htmlCode: string;
   // cssCode: string;
@@ -26,6 +29,7 @@ export interface WebStudioState {
   setShowModal: (showModal: boolean) => void
   previewUrl: string
   setPreviewUrl: (previewUrl: string) => void
+  loadProject: (ProjectResponse: ProjectResponse) => void
 }
 
 export interface EditorSettings {

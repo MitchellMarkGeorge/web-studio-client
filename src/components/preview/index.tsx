@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import styled from "styled-components";
 import { useWebStudioState } from "../../state";
 
@@ -15,9 +15,10 @@ const PreviewFrame = styled.iframe<{ isPaneDragging: boolean }>`
 
 
 export default function Preview() {
-  const previewUrl = useWebStudioState(state => state.previewUrl);
+  // const iframeRef = useRef<HTMLIFrameElement | null>(null);
+  // const previewUrl = useWebStudioState(state => state.previewUrl);
   const isPaneDragging = useWebStudioState((state) => state.isPaneDragging);
-  console.log("re preview updated");
+  const projectId = useWebStudioState(state => state.projectId) as number;
 
   // think about this
   const allowPermisions = useMemo(
@@ -47,7 +48,7 @@ export default function Preview() {
         "allow-pointer-lock",
         "allow-popups",
         "allow-presentation",
-        // "allow-same-origin",
+        "allow-same-origin",
         "allow-scripts",
         "allow-downloads",
       ].join(" "),
@@ -97,12 +98,12 @@ export default function Preview() {
   //   return URL.createObjectURL(previewBlob);
   // }, [cssCode, jsCode, htmlCode]);
 
-  useEffect(() => {
-    return () => {
-      // cleanup
-      URL.revokeObjectURL(previewUrl);
-    };
-  }, [previewUrl]);
+  // useEffect(() => {
+  //   return () => {
+  //     // cleanup
+  //     URL.revokeObjectURL(previewUrl);
+  //   };
+  // }, [previewUrl]);
 
 
   return (
@@ -111,7 +112,8 @@ export default function Preview() {
       // sandbox="allow-popups-to-escape-sandbox allow-scripts allow-popups allow-forms allow-pointer-lock allow-top-navigation allow-modals allow-same-origin"
       allow={allowPermisions}
       sandbox={sandboxPermisions}
-      src={previewUrl}
+      src={`http://localhost:8000/project/${projectId}/preview`}
+      // ref={iframeRef}
     />
   );
 }

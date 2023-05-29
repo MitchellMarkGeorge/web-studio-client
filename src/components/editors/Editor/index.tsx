@@ -38,6 +38,7 @@ interface Props {
   // code: string // might bcome usefull when saving to localStorage
   // language: Language | LanguageSupport; // need to figure out what this looks like
   language: Extension; // should I use strings and the editor loads the language based on it or should I just pass it in???
+  value: string
   //   options: EditorLanuage; // need to figure out what this looks like
   onCodeChange: (code: string) => void;
 }
@@ -141,6 +142,7 @@ export default function Editor(props: Props) {
     <CodeMirrorWrapper>
       <CodeMirror
         theme={darktheme}
+        value={props.value}
         extensions={[props.language]}
         height="100%"
         width="100%"

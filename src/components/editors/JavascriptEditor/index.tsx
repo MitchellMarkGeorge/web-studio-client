@@ -10,6 +10,7 @@ import { useWebStudioState } from "../../../state";
 
 export default function JavascriptEditor() {
   const saveJs = useWorkspaceState(state => state.saveJs);
+  const jsCode = useWorkspaceState(state => state.js);
   const javascriptSettings = useWebStudioState(state => state.javascriptSettings);
 
   // should wrap in both useCallback and debounce
@@ -23,6 +24,7 @@ export default function JavascriptEditor() {
       <EditorBar icon={SiJavascript} editorName="Javascript" preset={javascriptSettings.preset} />
       <CodeMirrorContainer>
         <Editor
+          value={jsCode}
           language={javascript({ jsx: true })}
           onCodeChange={debounce(onJavascriptChange, 500)}
         />

@@ -12,6 +12,7 @@ import { HTMLPreset } from "../../../state/types";
 export default function HTMLEditor() {
   // const updateCode = useWebStudioState((state) => state.updateCode);
   const saveHTML = useWorkspaceState(state => state.saveHTML);
+  const htmlCode = useWorkspaceState(state => state.html);
   const htmlSettings = useWebStudioState(state => state.htmlSettings);
 
   const onHtmlChanged = (code: string) => {
@@ -27,7 +28,7 @@ export default function HTMLEditor() {
       {/* <EditorBar icon={SiHtml5} editorName="HTML" iconColor="#df7743" /> */}
       <EditorBar icon={SiHtml5} editorName="HTML" preset={preset}/>
       <CodeMirrorContainer>
-        <Editor language={html()} onCodeChange={debounce(onHtmlChanged, 500)} />
+        <Editor value={htmlCode} language={html()} onCodeChange={debounce(onHtmlChanged, 500)} />
       </CodeMirrorContainer>
     </EditorContainer>
   );
